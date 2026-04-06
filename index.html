@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>BizMatch — 서로 찾는 비즈니스가 만나는 곳</title>
-<meta name="description" content="투자심사역은 CFO를 찾고, CFO는 투자심사역을 찾습니다. 서로 찾는 비즈니스를 동의 기반으로 연결합니다.">
+<meta name="description" content="카페 사장님은 원두 납품업체를 찾고, 로스터리는 카페를 찾습니다. 서로 찾는 비즈니스를 동의 기반으로 연결합니다.">
 <meta name="theme-color" content="#1a1a2e">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
@@ -72,19 +72,22 @@ const CATS=[
 const gc=k=>CATS.find(c=>c.key===k)||CATS[0];
 
 const SIGNALS=[
-{id:'s1',name:'김영호',av:'👨‍💼',co:'삼성전자',dept:'구매팀',pos:'과장',cat:'supply',kw:'반도체 세정 소재',desc:'웨이퍼 세정용 화학소재 공급업체를 찾고 있습니다. 월 5톤+ 납품 가능한 곳.',exp:'D-23',v:true,score:94,region:'전국',budget:'연 50억+'},
-{id:'s2',name:'이준혁',av:'👨‍💼',co:'현대자동차',dept:'구매팀',pos:'차장',cat:'supply',kw:'NCM 양극재',desc:'배터리용 NCM 양극재 납품 가능한 업체. 2차전지 소재 전문업체 우대.',exp:'D-15',v:true,score:87,region:'전국',budget:'연 200억+'},
-{id:'s3',name:'박수진',av:'👩‍💻',co:'네이버',dept:'AI Lab',pos:'팀장',cat:'partner',kw:'AI 산학협력',desc:'LLM 경량화 산학 협력 파트너. 대학 연구실 또는 AI 스타트업.',exp:'D-30',v:true,score:78,region:'서울/판교'},
-{id:'s4',name:'최민서',av:'👩‍💼',co:'토스',dept:'사업개발팀',pos:'매니저',cat:'partner',kw:'핀테크 API 연동',desc:'PG 결제 연동 파트너. 간편결제/해외결제 솔루션 보유 업체.',exp:'D-20',v:true,score:91,region:'서울'},
-{id:'s5',name:'한지영',av:'👩‍🔧',co:'쿠팡',dept:'물류기술팀',pos:'시니어엔지니어',cat:'supply',kw:'물류 자동화 로봇',desc:'풀필먼트센터용 AMR/AGV 공급업체. PoC 가능한 곳.',exp:'D-18',v:true,score:83,region:'경기'},
-{id:'s6',name:'오승민',av:'👨‍💼',co:'LG전자',dept:'영업팀',pos:'부장',cat:'buyer',kw:'디스플레이 솔루션',desc:'B2B 대형 디스플레이 도입할 기업. 리테일/호텔/오피스.',exp:'D-25',v:true,score:76,region:'전국'},
-{id:'s7',name:'정현우',av:'👨‍💻',co:'AI스타트업',dept:'',pos:'CEO',cat:'invest',kw:'시리즈A 투자유치',desc:'AI 영상분석. ARR 12억, MoM 15% 성장. 시리즈A 50억 목표.',exp:'D-28',v:true,score:88,region:'서울'},
-{id:'s8',name:'강태호',av:'👨‍🍳',co:'배달의민족',dept:'상점개발팀',pos:'팀장',cat:'partner',kw:'프랜차이즈 제휴',desc:'외식 프랜차이즈 본사 제휴. 가맹점 50개+ 브랜드.',exp:'D-12',v:true,score:82,region:'전국'},
+// 일상 비즈니스
+{id:'s1',name:'박준영',av:'☕',co:'로우커피',dept:'',pos:'대표',cat:'supply',kw:'스페셜티 원두 납품',desc:'카페 3개 운영 중. 에티오피아/콜롬비아 스페셜티 원두 월 50kg 납품 가능한 로스터리를 찾습니다.',exp:'D-25',v:true,score:95,region:'서울 강남',budget:'월 200만원'},
+{id:'s2',name:'김소연',av:'🛍️',co:'소연스타일',dept:'',pos:'대표',cat:'supply',kw:'여성 의류 위탁생산',desc:'온라인 쇼핑몰 운영. 봄 시즌 원피스/블라우스 500벌 위탁생산할 봉제공장을 찾습니다.',exp:'D-18',v:true,score:92,region:'서울/경기',budget:'건당 1,500만원'},
+{id:'s3',name:'이하늘',av:'📱',co:'',dept:'',pos:'유튜버 (8만 구독)',cat:'partner',kw:'뷰티/건강 브랜드 협찬',desc:'건강·뷰티 채널 운영. 제품 리뷰 콘텐츠 협찬해주실 브랜드를 찾습니다.',exp:'D-30',v:true,score:88,region:'서울'},
+{id:'s4',name:'최동건',av:'🍽️',co:'최씨네 족발',dept:'',pos:'사장님',cat:'supply',kw:'돼지 뒷다리 식자재',desc:'족발 프랜차이즈 5개점. 국내산 돼지 뒷다리 안정적 납품업체를 찾습니다. 월 1톤+.',exp:'D-20',v:true,score:90,region:'수도권',budget:'월 800만원'},
+// 중소기업
+{id:'s5',name:'한지영',av:'🔨',co:'한빛인테리어',dept:'',pos:'실장',cat:'supply',kw:'인테리어 타일/자재',desc:'상업공간 인테리어 전문. 대리석 타일, 몰딩 자재 도매 공급처를 찾습니다.',exp:'D-15',v:true,score:85,region:'서울/경기'},
+{id:'s6',name:'정민수',av:'🌏',co:'글로벌커머스',dept:'무역팀',pos:'팀장',cat:'buyer',kw:'K-푸드 해외 바이어',desc:'베트남·태국 유통망 보유. K-라면/K-소스 수출할 제조사를 찾습니다.',exp:'D-22',v:true,score:83,region:'전국'},
+// 대기업
+{id:'s7',name:'김영호',av:'👨‍💼',co:'삼성전자',dept:'구매팀',pos:'과장',cat:'supply',kw:'반도체 세정 소재',desc:'웨이퍼 세정용 화학소재 공급업체. 월 5톤+ 납품 가능한 곳.',exp:'D-23',v:true,score:94,region:'전국',budget:'연 50억+'},
+{id:'s8',name:'오승민',av:'👨‍💼',co:'AI스타트업',dept:'',pos:'CEO',cat:'invest',kw:'시리즈A 투자유치',desc:'AI 영상분석. ARR 12억, MoM 15% 성장. 시리즈A 50억 목표.',exp:'D-28',v:true,score:88,region:'서울'},
 ];
 
 const MY_SIG=[
-{id:'ms1',cat:'supply',kw:'AI SaaS 솔루션',desc:'B2B AI 자동화 솔루션 제공. 문서 분석, 고객 응대 자동화.',status:'active',views:23,matches:5},
-{id:'ms2',cat:'investor',kw:'AI/핀테크 시리즈A',desc:'AI·핀테크 초기 스타트업 투자. 5~30억 규모.',status:'active',views:47,matches:12},
+{id:'ms1',cat:'supply',kw:'수제 디저트 납품',desc:'마카롱·쿠키 등 수제 디저트를 카페에 납품합니다. 주 2회 배송 가능.',status:'active',views:23,matches:5},
+{id:'ms2',cat:'partner',kw:'공동 팝업스토어',desc:'성수동 팝업스토어 함께 운영할 브랜드를 찾습니다.',status:'active',views:47,matches:12},
 ];
 
 const INIT_MATCHES=[
@@ -141,9 +144,9 @@ return(<div style={{background:'var(--bg)'}}>
 <div className="au" style={{animationDelay:'.1s'}}><span className="badge b-am" style={{fontSize:13,padding:'6px 16px',marginBottom:20}}>⚡ 양방향 비즈니스 매칭 플랫폼</span></div>
 <h1 className="au" style={{animationDelay:'.2s',fontSize:'clamp(32px,5.5vw,54px)',fontWeight:800,lineHeight:1.12,letterSpacing:'-2px',marginBottom:20}}>서로 찾는 비즈니스가<br/><span style={{background:'linear-gradient(135deg,var(--amber),var(--coral))',backgroundSize:'200% 200%',animation:'gd 4s ease infinite',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}>여기서 만납니다</span></h1>
 <p className="au" style={{animationDelay:'.3s',fontSize:'clamp(16px,2.5vw,20px)',color:'var(--text2)',lineHeight:1.7,marginBottom:32}}>
-투자심사역은 CFO를 찾고, CFO는 투자심사역을 찾습니다.<br/>
-구매담당자는 공급업체를 찾고, 공급업체는 구매담당자를 찾습니다.<br/>
-<strong style={{color:'var(--text)'}}>서로 찾고 있지만 아직 만나지 못한 사람들</strong>을 연결합니다.
+카페 사장님은 원두 납품업체를 찾고, 로스터리는 카페를 찾습니다.<br/>
+쇼핑몰 대표는 공장을 찾고, 공장은 쇼핑몰을 찾습니다.<br/>
+<strong style={{color:'var(--text)'}}>서로 찾고 있는데, 아직 만나지 못했을 뿐.</strong>
 </p>
 <div className="au" style={{animationDelay:'.4s',display:'flex',gap:12,flexWrap:'wrap',marginBottom:16}}>
 <button className="btn btn-a btn-xl" onClick={()=>setPg('signup')}>매칭 시작하기 →</button>
@@ -160,9 +163,9 @@ return(<div style={{background:'var(--bg)'}}>
 {/* Problem */}
 <section style={{padding:'64px 0',background:'var(--navy)',color:'#fff'}}>
 <div className="ctn">
-<div style={{textAlign:'center',marginBottom:40}}><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>양쪽 다 간절한데,<br/>서로를 못 찾고 있습니다</h2></div>
+<div style={{textAlign:'center',marginBottom:40}}><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>양쪽 다 간절한데,<br/>서로를 못 찾고 있습니다</h2><p style={{color:'rgba(255,255,255,.5)',marginTop:8}}>대기업만의 이야기가 아닙니다</p></div>
 <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:16}}>
-{[{a:'투자심사역',b:'CFO/창업자',icon:'💰 ↔ 📊',pain:'서로 만나려면 지인 소개 3단계, 2~4주'},{a:'구매담당자',b:'공급업체',icon:'🛒 ↔ 🏭',pain:'구매는 검색만, 영업은 콜드콜. 접점 없음'},{a:'무역상',b:'제조사',icon:'🌏 ↔ 📦',pain:'전시회 아니면 방법이 없음'},{a:'인사팀',b:'인재',icon:'👥 ↔ 💼',pain:'채용사이트는 일방통행. 실무자를 못 만남'}].map((x,i)=>(
+{[{a:'카페 사장님',b:'원두 로스터리',icon:'☕ ↔ 🫘',pain:'좋은 원두 어디서 구하지? vs 납품처를 찾고 싶은데'},{a:'쇼핑몰 대표',b:'의류 공장',icon:'🛍️ ↔ 🏭',pain:'위탁생산 할 곳이 필요해 vs 주문할 곳이 없어'},{a:'유튜버',b:'광고주 브랜드',icon:'📱 ↔ 💄',pain:'협찬 어떻게 받지? vs 인플루언서 어디서 찾지?'},{a:'식당 사장님',b:'식자재 납품업체',icon:'🍽️ ↔ 🥬',pain:'더 싸고 좋은 식자재 vs 안정적 거래처 확보'},{a:'인테리어 업자',b:'자재 도매상',icon:'🔨 ↔ 🧱',pain:'저렴한 자재 어디? vs 시공업체에 납품하고 싶어'},{a:'구매담당자',b:'공급업체',icon:'🛒 ↔ 📦',pain:'신규 공급처 발굴이 급해 vs 대기업에 영업하고 싶어'}].map((x,i)=>(
 <div key={i} style={{background:'rgba(255,255,255,.06)',borderRadius:'var(--r)',padding:22,border:'1px solid rgba(255,255,255,.08)',textAlign:'center'}}>
 <div style={{fontSize:22,marginBottom:6}}>{x.icon}</div>
 <div style={{marginBottom:6}}><span style={{fontWeight:700}}>{x.a}</span> <span style={{color:'var(--amber)',fontWeight:800}}>⚡</span> <span style={{fontWeight:700}}>{x.b}</span></div>
@@ -177,7 +180,7 @@ return(<div style={{background:'var(--bg)'}}>
 <div className="ctn">
 <div style={{textAlign:'center',marginBottom:48}}><div className="badge b-am" style={{marginBottom:12}}>HOW IT WORKS</div><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>3단계로 파트너를 만나세요</h2></div>
 <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:20}}>
-{[{s:'01',icon:'📡',t:'신호를 켜세요',d:'"배터리 소재 공급업체를 찾습니다"\n"시리즈A 투자를 유치하고 싶습니다"\n무엇을 찾는지 알려주세요.',c:'var(--amber)'},{s:'02',icon:'⚡',t:'매칭을 받으세요',d:'당신이 찾는 것 ↔ 상대가 찾는 것이\n일치하면 자동 매칭됩니다.\n양쪽 모두에게 알림이 갑니다.',c:'var(--teal)'},{s:'03',icon:'🤝',t:'연결하세요',d:'양쪽이 모두 수락하면\n연락처가 상호 공개됩니다.\n거래를 시작하세요!',c:'var(--blue)'}].map((s,i)=>(
+{[{s:'01',icon:'📡',t:'신호를 켜세요',d:'"좋은 원두 납품업체를 찾습니다"\n"의류 위탁생산 공장이 필요합니다"\n찾고 있는 것을 알려주세요.',c:'var(--amber)'},{s:'02',icon:'⚡',t:'매칭을 받으세요',d:'"이 로스터리가 카페 납품을 원합니다"\n양쪽 신호가 맞으면 자동 매칭!\n매칭 이유와 정확도를 알려드려요.',c:'var(--teal)'},{s:'03',icon:'🤝',t:'연결하세요',d:'양쪽이 모두 수락하면\n연락처가 상호 공개됩니다.\n바로 거래를 시작하세요!',c:'var(--blue)'}].map((s,i)=>(
 <div key={i} className="card" style={{padding:28,textAlign:'center',borderTop:`3px solid ${s.c}`,position:'relative'}}>
 <div style={{fontSize:44,marginBottom:12}}>{s.icon}</div>
 <h3 style={{fontWeight:700,fontSize:18,marginBottom:8}}>{s.t}</h3>
@@ -204,7 +207,7 @@ return(<div style={{background:'var(--bg)'}}>
 <div className="ctn">
 <div style={{textAlign:'center',marginBottom:40}}><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>실제 매칭 사례</h2></div>
 <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:16}}>
-{[{a:'삼성전자 구매팀',b:'A화학 영업팀',r:'웨이퍼 소재 연간 계약',t:'구매↔공급',d:'매칭 후 3일 만에 미팅'},{a:'AI 스타트업 CEO',b:'한국투자 심사역',r:'시리즈A 30억 투자 유치',t:'투자유치↔투자처',d:'매칭 후 1주 만에 TS'},{a:'쿠팡 물류팀',b:'로봇 제조사',r:'풀필먼트 자동화 PoC',t:'구매↔공급',d:'매칭 후 5일 만에 방문'}].map((c,i)=>(
+{[{a:'강남 카페 사장님',b:'제주 로스터리',r:'스페셜티 원두 월 정기납품 계약',t:'구매↔공급',d:'매칭 후 2일 만에 샘플 수령'},{a:'의류 쇼핑몰 대표',b:'동대문 봉제공장',r:'위탁생산 월 500벌 계약',t:'발주↔생산',d:'매칭 후 3일 만에 미팅'},{a:'뷰티 유튜버 (12만 구독)',b:'신생 화장품 브랜드',r:'월 2건 협찬 + 매출 연동 수수료',t:'광고↔인플루언서',d:'매칭 후 1일 만에 DM'},{a:'AI 스타트업 CEO',b:'VC 심사역',r:'시리즈A 30억 투자 유치',t:'투자유치↔투자처',d:'매칭 후 1주 만에 TS'},{a:'인테리어 시공팀',b:'타일 도매상',r:'현장 직납 월 거래 시작',t:'구매↔공급',d:'매칭 후 당일 견적'},{a:'삼성전자 구매팀',b:'반도체 소재 업체',r:'웨이퍼 소재 연간 계약',t:'구매↔공급',d:'매칭 후 3일 만에 미팅'}].map((c,i)=>(
 <div key={i} className="card" style={{padding:24}}>
 <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}><span className="badge b-am" style={{fontSize:10}}>{c.t}</span><span style={{fontSize:11,color:'var(--text3)'}}>{c.d}</span></div>
 <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}>
@@ -259,12 +262,12 @@ return(<div style={{minHeight:'100vh',display:'flex',alignItems:'center',justify
 <div className="card" style={{padding:26}}>
 {s===1&&<div className="asr">
 <div style={{marginBottom:10}}><span className="il">이름</span><input className="inp" placeholder="홍길동"/></div>
-<div style={{marginBottom:10}}><span className="il">회사명</span><input className="inp" placeholder="소속 회사"/></div>
+<div style={{marginBottom:10}}><span className="il">회사명</span><input className="inp" placeholder="회사명, 가게명, 브랜드명"/></div>
 <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginBottom:10}}>
-<div><span className="il">부서</span><input className="inp" placeholder="영업팀"/></div>
-<div><span className="il">직책</span><input className="inp" placeholder="과장"/></div>
+<div><span className="il">부서</span><input className="inp" placeholder="없으면 비워두세요"/></div>
+<div><span className="il">직책</span><input className="inp" placeholder="대표, 사장님, 팀장 등"/></div>
 </div>
-<div style={{marginBottom:18}}><span className="il">업종</span><input className="inp" placeholder="IT/SaaS, 제조, 식품 등"/></div>
+<div style={{marginBottom:18}}><span className="il">업종</span><input className="inp" placeholder="카페, 쇼핑몰, 인테리어, IT 등"/></div>
 <button className="btn btn-a btn-w" onClick={()=>setS(2)}>다음 →</button>
 </div>}
 {s===2&&<div className="asr">
@@ -283,7 +286,7 @@ return(<div style={{minHeight:'100vh',display:'flex',alignItems:'center',justify
 {cats.slice(0,3).map(ck=>{const c=gc(ck);return(
 <div key={ck} style={{marginBottom:14}}>
 <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:6}}><span>{c.icon}</span><span className="il" style={{marginBottom:0}}>{c.label}</span></div>
-<textarea className="inp" placeholder="구체적일수록 매칭 정확도가 높아집니다" rows={2} style={{resize:'none',fontSize:13}}/>
+<textarea className="inp" placeholder="예: 에티오피아 원두 월 30kg 납품해줄 로스터리를 찾습니다" rows={2} style={{resize:'none',fontSize:13}}/>
 </div>)})}
 <div style={{display:'flex',gap:8}}><button className="btn btn-o" style={{flex:1}} onClick={()=>setS(2)}>←</button><button className="btn btn-a" style={{flex:2}} onClick={login}>⚡ 매칭 시작!</button></div>
 </div>}

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>BizMatch — 서로 찾는 비즈니스가 만나는 곳</title>
-<meta name="description" content="카페 사장님은 원두 납품업체를 찾고, 로스터리는 카페를 찾습니다. 서로 찾는 비즈니스를 동의 기반으로 연결합니다.">
+<meta name="description" content="카페 사장님은 원두 납품업체를 찾고, 삼성전자 구매팀은 소재 공급업체를 찾습니다. 1인 사장님부터 대기업까지, 서로 찾는 비즈니스를 동의 기반으로 연결합니다.">
 <meta name="theme-color" content="#1a1a2e">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
@@ -82,7 +82,11 @@ const SIGNALS=[
 {id:'s6',name:'정민수',av:'🌏',co:'글로벌커머스',dept:'무역팀',pos:'팀장',cat:'buyer',kw:'K-푸드 해외 바이어',desc:'베트남·태국 유통망 보유. K-라면/K-소스 수출할 제조사를 찾습니다.',exp:'D-22',v:true,score:83,region:'전국'},
 // 대기업
 {id:'s7',name:'김영호',av:'👨‍💼',co:'삼성전자',dept:'구매팀',pos:'과장',cat:'supply',kw:'반도체 세정 소재',desc:'웨이퍼 세정용 화학소재 공급업체. 월 5톤+ 납품 가능한 곳.',exp:'D-23',v:true,score:94,region:'전국',budget:'연 50억+'},
-{id:'s8',name:'오승민',av:'👨‍💼',co:'AI스타트업',dept:'',pos:'CEO',cat:'invest',kw:'시리즈A 투자유치',desc:'AI 영상분석. ARR 12억, MoM 15% 성장. 시리즈A 50억 목표.',exp:'D-28',v:true,score:88,region:'서울'},
+{id:'s8',name:'오승민',av:'🚀',co:'AI스타트업',dept:'',pos:'CEO',cat:'invest',kw:'시리즈A 투자유치 (50억)',desc:'AI 영상분석. ARR 12억, MoM 15% 성장. 시리즈A 50억 목표.',exp:'D-28',v:true,score:88,region:'서울'},
+{id:'s9',name:'이준혁',av:'🏭',co:'현대자동차',dept:'전기차사업부',pos:'구매팀장',cat:'supply',kw:'NCM 양극재 공급업체',desc:'2027년 양산 대비 장기 납품 파트너 선정 중. 연간 5,000톤 규모.',exp:'D-30',v:true,score:97,region:'전국',budget:'연 500억+'},
+{id:'s10',name:'박수진',av:'👩‍💻',co:'네이버',dept:'AI Lab',pos:'팀장',cat:'partner',kw:'AI 학습 데이터 파트너',desc:'한국어 특화 데이터셋 구축 협력 기업을 찾습니다.',exp:'D-20',v:true,score:86,region:'서울'},
+{id:'s11',name:'강태호',av:'✈️',co:'아모레퍼시픽',dept:'해외사업팀',pos:'부장',cat:'export',kw:'동남아 유통 파트너',desc:'베트남·태국 현지 유통망을 갖춘 무역 파트너사를 찾습니다.',exp:'D-18',v:true,score:82,region:'전국'},
+{id:'s12',name:'한서연',av:'💊',co:'스타셀',dept:'',pos:'CEO',cat:'invest',kw:'2차전지 소재 투자유치',desc:'NCM 양극재 전문 스타트업. 양산 설비 투자를 위한 시리즈A 50억.',exp:'D-14',v:true,score:91,region:'서울'},
 ];
 
 const MY_SIG=[
@@ -93,8 +97,28 @@ const MY_SIG=[
 const INIT_MATCHES=[
 {id:'m1',sig:SIGNALS[0],mySig:MY_SIG[0],score:94,st:'new',at:'2026-04-01'},
 {id:'m2',sig:SIGNALS[3],mySig:MY_SIG[0],score:91,st:'new',at:'2026-04-02'},
-{id:'m3',sig:SIGNALS[6],mySig:MY_SIG[1],score:88,st:'viewed',at:'2026-03-30'},
-{id:'m4',sig:SIGNALS[4],mySig:MY_SIG[0],score:83,st:'viewed',at:'2026-03-28'},
+{id:'m3',sig:SIGNALS[8],mySig:MY_SIG[1],score:97,st:'new',at:'2026-04-03'},
+{id:'m4',sig:SIGNALS[6],mySig:MY_SIG[1],score:88,st:'viewed',at:'2026-03-30'},
+{id:'m5',sig:SIGNALS[4],mySig:MY_SIG[0],score:83,st:'viewed',at:'2026-03-28'},
+];
+
+const INIT_CHATS=[
+{id:'ch1',name:'오승민',co:'LG전자',av:'👨‍💼',unread:2,lastMsg:'네, 4/10 오후 2시에 뵙겠습니다.',lastAt:'오후 3:24',
+msgs:[{id:1,from:'them',text:'안녕하세요, BizMatch에서 매칭되어 연락드립니다.',at:'오후 2:10'},{id:2,from:'me',text:'안녕하세요! 디스플레이 솔루션 건으로 연결되었네요.',at:'오후 2:15'},{id:3,from:'them',text:'네, 귀사 AI SaaS에 관심이 있습니다. 미팅 가능하실까요?',at:'오후 2:20'},{id:4,from:'me',text:'물론이죠. 4/10 오후 2시 어떠세요?',at:'오후 2:45'},{id:5,from:'them',text:'네, 4/10 오후 2시에 뵙겠습니다.',at:'오후 3:24'}]},
+{id:'ch2',name:'윤미정',co:'제주드림로스터리',av:'☕',unread:0,lastMsg:'샘플 보내드렸습니다! 내일 도착 예정이에요.',lastAt:'어제',
+msgs:[{id:1,from:'me',text:'안녕하세요! 카페에 납품할 원두를 찾고 있는데, 에티오피아 예가체프 가능하신가요?',at:'3/28'},{id:2,from:'them',text:'네! 예가체프 G1, G2 다 가능합니다. 어떤 로스팅 레벨 선호하세요?',at:'3/28'},{id:3,from:'me',text:'미디엄 로스팅이요. 샘플 200g 정도 받아볼 수 있을까요?',at:'3/29'},{id:4,from:'them',text:'샘플 보내드렸습니다! 내일 도착 예정이에요.',at:'3/30'}]},
+];
+
+const DIRECTORY=[
+{co:'삼성전자',dept:'반도체사업부 구매팀',people:[{name:'김영호',pos:'과장',sig:'웨이퍼 세정제 공급업체 찾는 중'},{name:'박지훈',pos:'대리',sig:'패키징 소재 납품사 찾는 중'}]},
+{co:'현대자동차',dept:'전기차사업부 구매팀',people:[{name:'이준혁',pos:'팀장',sig:'NCM 양극재 연간 납품사 선정 중'},{name:'최민서',pos:'과장',sig:'배터리 냉각 시스템 공급업체'}]},
+{co:'네이버',dept:'AI Lab',people:[{name:'박수진',pos:'팀장',sig:'AI 학습 데이터 구축 파트너'}]},
+{co:'아모레퍼시픽',dept:'해외사업팀',people:[{name:'강태호',pos:'부장',sig:'동남아 유통 파트너 물색 중'}]},
+{co:'CJ제일제당',dept:'구매팀',people:[{name:'윤성민',pos:'차장',sig:'식품 포장재 신규 공급업체'}]},
+{co:'토스',dept:'사업개발팀',people:[{name:'최민서',pos:'매니저',sig:'보험사 API 연동 파트너'}]},
+{co:'제주드림로스터리',dept:'',people:[{name:'윤미정',pos:'대표',sig:'카페 납품처 확대 중 (서울/경기)'}]},
+{co:'동대문 JS봉제',dept:'',people:[{name:'정수빈',pos:'공장장',sig:'의류 위탁생산 주문 받습니다'}]},
+{co:'한빛인테리어',dept:'',people:[{name:'한지영',pos:'실장',sig:'타일/몰딩 자재 도매처 찾는 중'}]},
 ];
 
 function App(){
@@ -105,20 +129,24 @@ const[matches,setMatches]=useState(INIT_MATCHES);
 const[conns,setConns]=useState([{id:'cn1',name:'오승민',co:'LG전자',dept:'영업팀',pos:'부장',ph:'010-3456-7890',av:'👨‍💼',at:'2026-03-25',ctx:'디스플레이 솔루션 ↔ AI SaaS',memo:'미팅 4/10 예정'}]);
 const[modal,setModal]=useState(null);
 const[selSig,setSelSig]=useState(null);
+const[chats,setChats]=useState(INIT_CHATS);
+const[chatId,setChatId]=useState(null);
 
 const st=useCallback((m,d=3000)=>{setToast(m);setTimeout(()=>setToast(null),d)},[]);
 const login=()=>{setUser({id:'me',name:'나현준',co:'스타트업허브',dept:'사업개발팀',pos:'대표',av:'😎',plan:'PRO'});setPg('home');st('⚡ 환영합니다! 새로운 매칭 3건이 있습니다')};
 const newN=matches.filter(m=>m.st==='new').length;
+const chatUn=chats.reduce((a,c)=>a+c.unread,0);
+const sendMsg=(cid,text)=>{setChats(p=>p.map(c=>c.id===cid?{...c,msgs:[...c.msgs,{id:Date.now(),from:'me',text,at:'방금'}],lastMsg:text,lastAt:'방금',unread:0}:c))};
 const connect=(mid)=>{
 const m=matches.find(x=>x.id===mid);if(!m)return;
 setMatches(p=>p.map(x=>x.id===mid?{...x,st:'connected'}:x));
 setConns(p=>[{id:'cn'+Date.now(),name:m.sig.name,co:m.sig.co,dept:m.sig.dept,pos:m.sig.pos,ph:'010-'+Math.floor(1e3+Math.random()*9e3)+'-'+Math.floor(1e3+Math.random()*9e3),av:m.sig.av,at:new Date().toISOString().split('T')[0],ctx:m.sig.kw+' ↔ '+m.mySig.kw,memo:''},...p]);
-st('🎉 연결 완료! 연락처가 상호 공개됩니다');};
+st('🎉 연결 완료! 💬 채팅에서 대화를 시작하세요');};
 
-const ctx={pg,setPg,user,login,toast,st,matches,setMatches,conns,setConns,modal,setModal,selSig,setSelSig,newN,connect};
+const ctx={pg,setPg,user,login,toast,st,matches,setMatches,conns,setConns,modal,setModal,selSig,setSelSig,newN,connect,chats,setChats,chatId,setChatId,chatUn,sendMsg};
 return(<Ctx.Provider value={ctx}>
 {pg==='landing'&&<Landing/>}{pg==='login'&&<Login/>}{pg==='signup'&&<Signup/>}
-{user&&['home','signals','matches','connections','profile','settings'].includes(pg)&&<Shell/>}
+{user&&['home','search','chat','chatroom','signals','matches','connections','profile','settings'].includes(pg)&&<Shell/>}
 {modal==='detail'&&selSig&&<SigDetail/>}
 {modal==='connect'&&selSig&&<ConnModal/>}
 {toast&&<div className="toast" role="alert">{toast}</div>}
@@ -144,9 +172,10 @@ return(<div style={{background:'var(--bg)'}}>
 <div className="au" style={{animationDelay:'.1s'}}><span className="badge b-am" style={{fontSize:13,padding:'6px 16px',marginBottom:20}}>⚡ 양방향 비즈니스 매칭 플랫폼</span></div>
 <h1 className="au" style={{animationDelay:'.2s',fontSize:'clamp(32px,5.5vw,54px)',fontWeight:800,lineHeight:1.12,letterSpacing:'-2px',marginBottom:20}}>서로 찾는 비즈니스가<br/><span style={{background:'linear-gradient(135deg,var(--amber),var(--coral))',backgroundSize:'200% 200%',animation:'gd 4s ease infinite',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}>여기서 만납니다</span></h1>
 <p className="au" style={{animationDelay:'.3s',fontSize:'clamp(16px,2.5vw,20px)',color:'var(--text2)',lineHeight:1.7,marginBottom:32}}>
-카페 사장님은 원두 납품업체를 찾고, 로스터리는 카페를 찾습니다.<br/>
-쇼핑몰 대표는 공장을 찾고, 공장은 쇼핑몰을 찾습니다.<br/>
-<strong style={{color:'var(--text)'}}>서로 찾고 있는데, 아직 만나지 못했을 뿐.</strong>
+카페 사장님은 원두 로스터리를 찾고, 로스터리는 카페를 찾습니다.<br/>
+쇼핑몰 대표는 봉제공장을 찾고, 공장은 발주처를 찾습니다.<br/>
+구매담당자는 공급업체를 찾고, 공급업체는 구매담당자를 찾습니다.<br/>
+<strong style={{color:'var(--text)'}}>1인 사장님부터 대기업까지, 서로 찾고 있는데 아직 만나지 못했을 뿐.</strong>
 </p>
 <div className="au" style={{animationDelay:'.4s',display:'flex',gap:12,flexWrap:'wrap',marginBottom:16}}>
 <button className="btn btn-a btn-xl" onClick={()=>setPg('signup')}>매칭 시작하기 →</button>
@@ -163,9 +192,9 @@ return(<div style={{background:'var(--bg)'}}>
 {/* Problem */}
 <section style={{padding:'64px 0',background:'var(--navy)',color:'#fff'}}>
 <div className="ctn">
-<div style={{textAlign:'center',marginBottom:40}}><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>양쪽 다 간절한데,<br/>서로를 못 찾고 있습니다</h2><p style={{color:'rgba(255,255,255,.5)',marginTop:8}}>대기업만의 이야기가 아닙니다</p></div>
+<div style={{textAlign:'center',marginBottom:40}}><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>양쪽 다 간절한데,<br/>서로를 못 찾고 있습니다</h2><p style={{color:'rgba(255,255,255,.5)',marginTop:8}}>동네 카페부터 삼성전자까지, 모두 같은 고민입니다</p></div>
 <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:16}}>
-{[{a:'카페 사장님',b:'원두 로스터리',icon:'☕ ↔ 🫘',pain:'좋은 원두 어디서 구하지? vs 납품처를 찾고 싶은데'},{a:'쇼핑몰 대표',b:'의류 공장',icon:'🛍️ ↔ 🏭',pain:'위탁생산 할 곳이 필요해 vs 주문할 곳이 없어'},{a:'유튜버',b:'광고주 브랜드',icon:'📱 ↔ 💄',pain:'협찬 어떻게 받지? vs 인플루언서 어디서 찾지?'},{a:'식당 사장님',b:'식자재 납품업체',icon:'🍽️ ↔ 🥬',pain:'더 싸고 좋은 식자재 vs 안정적 거래처 확보'},{a:'인테리어 업자',b:'자재 도매상',icon:'🔨 ↔ 🧱',pain:'저렴한 자재 어디? vs 시공업체에 납품하고 싶어'},{a:'구매담당자',b:'공급업체',icon:'🛒 ↔ 📦',pain:'신규 공급처 발굴이 급해 vs 대기업에 영업하고 싶어'}].map((x,i)=>(
+{[{a:'카페 사장님',b:'원두 로스터리',icon:'☕ ↔ 🫘',pain:'좋은 원두 어디서 구하지? vs 납품처를 찾고 싶은데',tag:'일상'},{a:'쇼핑몰 대표',b:'봉제공장',icon:'🛍️ ↔ 🏭',pain:'위탁생산 할 곳이 필요해 vs 주문할 곳이 없어',tag:'일상'},{a:'유튜버',b:'광고주 브랜드',icon:'📱 ↔ 💄',pain:'협찬 어떻게 받지? vs 인플루언서 어디서 찾지?',tag:'일상'},{a:'식당 사장님',b:'식자재 납품업체',icon:'🍽️ ↔ 🥬',pain:'더 싸고 좋은 식자재 vs 안정적 거래처 확보',tag:'일상'},{a:'인테리어 업자',b:'자재 도매상',icon:'🔨 ↔ 🧱',pain:'저렴한 자재 어디? vs 시공업체에 납품하고 싶어',tag:'일상'},{a:'구매담당자',b:'공급업체',icon:'🛒 ↔ 📦',pain:'신규 공급처 발굴이 급해 vs 대기업에 영업하고 싶어',tag:'기업'},{a:'투자심사역',b:'스타트업 CEO',icon:'📊 ↔ 🚀',pain:'유망 기업을 찾고 싶어 vs 투자자를 만나고 싶어',tag:'기업'},{a:'무역상',b:'제조사',icon:'🌏 ↔ 🏭',pain:'수출할 제품이 필요해 vs 해외 유통망이 필요해',tag:'기업'}].map((x,i)=>(
 <div key={i} style={{background:'rgba(255,255,255,.06)',borderRadius:'var(--r)',padding:22,border:'1px solid rgba(255,255,255,.08)',textAlign:'center'}}>
 <div style={{fontSize:22,marginBottom:6}}>{x.icon}</div>
 <div style={{marginBottom:6}}><span style={{fontWeight:700}}>{x.a}</span> <span style={{color:'var(--amber)',fontWeight:800}}>⚡</span> <span style={{fontWeight:700}}>{x.b}</span></div>
@@ -180,7 +209,7 @@ return(<div style={{background:'var(--bg)'}}>
 <div className="ctn">
 <div style={{textAlign:'center',marginBottom:48}}><div className="badge b-am" style={{marginBottom:12}}>HOW IT WORKS</div><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>3단계로 파트너를 만나세요</h2></div>
 <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:20}}>
-{[{s:'01',icon:'📡',t:'신호를 켜세요',d:'"좋은 원두 납품업체를 찾습니다"\n"의류 위탁생산 공장이 필요합니다"\n찾고 있는 것을 알려주세요.',c:'var(--amber)'},{s:'02',icon:'⚡',t:'매칭을 받으세요',d:'"이 로스터리가 카페 납품을 원합니다"\n양쪽 신호가 맞으면 자동 매칭!\n매칭 이유와 정확도를 알려드려요.',c:'var(--teal)'},{s:'03',icon:'🤝',t:'연결하세요',d:'양쪽이 모두 수락하면\n연락처가 상호 공개됩니다.\n바로 거래를 시작하세요!',c:'var(--blue)'}].map((s,i)=>(
+{[{s:'01',icon:'📡',t:'신호를 켜세요',d:'"좋은 원두 납품업체를 찾습니다"\n"NCM 양극재 공급업체가 필요합니다"\n카페 사장님부터 대기업 구매팀까지\n찾고 있는 것을 알려주세요.',c:'var(--amber)'},{s:'02',icon:'⚡',t:'매칭을 받으세요',d:'"이 로스터리가 카페 납품을 원합니다"\n"이 소재업체가 납품 가능합니다"\n양쪽 신호가 맞으면 자동 매칭!',c:'var(--teal)'},{s:'03',icon:'🤝',t:'연결하세요',d:'양쪽이 모두 수락하면\n담당자 이름·직책·연락처가 공개됩니다.\n바로 전화하고, 미팅 잡고, 거래하세요!',c:'var(--blue)'}].map((s,i)=>(
 <div key={i} className="card" style={{padding:28,textAlign:'center',borderTop:`3px solid ${s.c}`,position:'relative'}}>
 <div style={{fontSize:44,marginBottom:12}}>{s.icon}</div>
 <h3 style={{fontWeight:700,fontSize:18,marginBottom:8}}>{s.t}</h3>
@@ -202,14 +231,57 @@ return(<div style={{background:'var(--bg)'}}>
 </div>))}
 </div></div></section>
 
+{/* Contact Discovery - 일상앱처럼 표현 */}
+<section style={{padding:'72px 0'}}>
+<div className="ctn">
+<div style={{textAlign:'center',marginBottom:40}}>
+<div className="badge b-tl" style={{marginBottom:12}}>NEW</div>
+<h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>연락처 찾기, 이렇게 쉬워요</h2>
+<p style={{color:'var(--text2)',marginTop:8}}>전화번호부 뒤지듯, 회사·부서·담당자를 바로 찾으세요</p>
+</div>
+<div style={{maxWidth:480,margin:'0 auto'}}>
+{/* 검색 데모 */}
+<div className="card" style={{padding:0,overflow:'hidden',border:'2px solid var(--amber)',marginBottom:20}}>
+<div style={{background:'var(--amber)',padding:'12px 18px',display:'flex',alignItems:'center',gap:8}}>
+<span style={{fontSize:16}}>🔍</span>
+<span style={{color:'var(--navy)',fontWeight:700,fontSize:14}}>담당자 찾기</span>
+</div>
+<div style={{padding:16}}>
+<div style={{background:'var(--bg2)',borderRadius:10,padding:'12px 16px',marginBottom:14,fontSize:14,color:'var(--text3)'}}>🔍 "삼성전자 구매팀" 검색</div>
+{/* 결과 */}
+{[{name:'김영호',pos:'구매팀 과장',co:'삼성전자 반도체사업부',sig:'웨이퍼 세정제 공급업체 찾는 중',av:'👨‍💼'},{name:'이준혁',pos:'구매팀장',co:'삼성전자 DS부문',sig:'NCM 양극재 연간 납품사 선정 중',av:'👨‍💼'}].map((p,i)=>(
+<div key={i} style={{display:'flex',gap:12,alignItems:'center',padding:'12px 0',borderBottom:i===0?'1px solid var(--bg2)':'none'}}>
+<div style={{width:40,height:40,borderRadius:20,background:'var(--blue-l)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:20}}>{p.av}</div>
+<div style={{flex:1}}>
+<div style={{fontWeight:700,fontSize:14}}>{p.name} <span style={{fontSize:11,color:'var(--text3)',fontWeight:400}}>{p.pos}</span></div>
+<div style={{fontSize:12,color:'var(--text2)'}}>📍 {p.co}</div>
+<div style={{fontSize:11,color:'var(--teal)',marginTop:2}}>📢 {p.sig}</div>
+</div>
+<div style={{padding:'6px 10px',borderRadius:8,background:'var(--amber)',color:'var(--navy)',fontSize:11,fontWeight:700,cursor:'pointer',whiteSpace:'nowrap'}}>연결 요청</div>
+</div>
+))}
+</div>
+</div>
+{/* 사용 예시 */}
+<div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
+{[{q:'"현대자동차 EV배터리팀"',icon:'🏭'},{q:'"아모레퍼시픽 해외영업"',icon:'💄'},{q:'"네이버 AI Lab"',icon:'💻'},{q:'"CJ제일제당 구매팀"',icon:'🍜'},{q:'"원두 로스터리 납품"',icon:'☕'},{q:'"인테리어 타일 도매"',icon:'🔨'}].map((e,i)=>(
+<div key={i} style={{background:'var(--bg2)',borderRadius:10,padding:'10px 14px',display:'flex',alignItems:'center',gap:8,fontSize:12,color:'var(--text2)'}}>
+<span>{e.icon}</span><span>{e.q}</span>
+</div>
+))}
+</div>
+<p style={{textAlign:'center',marginTop:16,fontSize:13,color:'var(--text3)'}}>회사명, 부서명, 업종으로 검색하면<br/><strong style={{color:'var(--text)'}}>담당자 이름·직책·연락처</strong>를 바로 확인할 수 있습니다<br/><span style={{fontSize:11,color:'var(--teal)'}}>* 양쪽 동의 시에만 연락처 공개</span></p>
+</div>
+</div></section>
+
 {/* Cases */}
 <section style={{padding:'72px 0'}}>
 <div className="ctn">
-<div style={{textAlign:'center',marginBottom:40}}><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>실제 매칭 사례</h2></div>
+<div style={{textAlign:'center',marginBottom:40}}><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>실제 매칭 사례</h2><p style={{color:'var(--text2)',marginTop:8}}>동네 카페부터 삼성전자까지, 매칭은 규모를 가리지 않습니다</p></div>
 <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:16}}>
-{[{a:'강남 카페 사장님',b:'제주 로스터리',r:'스페셜티 원두 월 정기납품 계약',t:'구매↔공급',d:'매칭 후 2일 만에 샘플 수령'},{a:'의류 쇼핑몰 대표',b:'동대문 봉제공장',r:'위탁생산 월 500벌 계약',t:'발주↔생산',d:'매칭 후 3일 만에 미팅'},{a:'뷰티 유튜버 (12만 구독)',b:'신생 화장품 브랜드',r:'월 2건 협찬 + 매출 연동 수수료',t:'광고↔인플루언서',d:'매칭 후 1일 만에 DM'},{a:'AI 스타트업 CEO',b:'VC 심사역',r:'시리즈A 30억 투자 유치',t:'투자유치↔투자처',d:'매칭 후 1주 만에 TS'},{a:'인테리어 시공팀',b:'타일 도매상',r:'현장 직납 월 거래 시작',t:'구매↔공급',d:'매칭 후 당일 견적'},{a:'삼성전자 구매팀',b:'반도체 소재 업체',r:'웨이퍼 소재 연간 계약',t:'구매↔공급',d:'매칭 후 3일 만에 미팅'}].map((c,i)=>(
+{[{a:'강남 카페 사장님',b:'제주 로스터리',r:'스페셜티 원두 월 정기납품 계약',t:'☕ 구매↔공급',d:'매칭 후 2일 만에 샘플 수령',tag:'일상'},{a:'의류 쇼핑몰 대표',b:'동대문 봉제공장',r:'위탁생산 월 500벌 계약',t:'🛍️ 발주↔생산',d:'매칭 후 3일 만에 미팅',tag:'일상'},{a:'뷰티 유튜버 (12만)',b:'신생 화장품 브랜드',r:'월 2건 협찬 + 매출 연동',t:'📱 광고↔인플루언서',d:'매칭 후 1일 만에 DM',tag:'일상'},{a:'현대자동차 구매팀장',b:'NCM 양극재 스타트업',r:'연간 5,000톤 납품 MOU',t:'🏭 구매↔공급',d:'매칭 후 3일 만에 미팅',tag:'대기업'},{a:'AI 스타트업 CEO',b:'한국투자 VC 심사역',r:'시리즈A 50억 투자 유치',t:'💰 투자유치↔투자처',d:'매칭 후 1주 만에 TS',tag:'스타트업'},{a:'인테리어 시공팀',b:'타일 도매상',r:'현장 직납 월 거래 시작',t:'🔨 구매↔공급',d:'매칭 후 당일 견적',tag:'일상'},{a:'삼성전자 구매팀',b:'반도체 소재 업체',r:'웨이퍼 세정제 연간 계약',t:'🏢 구매↔공급',d:'매칭 후 3일 만에 미팅',tag:'대기업'},{a:'K-뷰티 무역상',b:'아모레퍼시픽 해외팀',r:'베트남 유통 파트너십',t:'🌏 수출↔무역',d:'매칭 후 5일 만에 미팅',tag:'수출'}].map((c,i)=>(
 <div key={i} className="card" style={{padding:24}}>
-<div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}><span className="badge b-am" style={{fontSize:10}}>{c.t}</span><span style={{fontSize:11,color:'var(--text3)'}}>{c.d}</span></div>
+<div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}><span className="badge b-am" style={{fontSize:10}}>{c.t}</span><span style={{fontSize:10,padding:'3px 8px',borderRadius:10,background:c.tag==='대기업'?'var(--blue-l)':c.tag==='스타트업'?'var(--violet-l)':c.tag==='수출'?'var(--teal-l)':'var(--bg2)',color:c.tag==='대기업'?'var(--blue)':c.tag==='스타트업'?'var(--violet)':c.tag==='수출'?'var(--teal)':'var(--text3)',fontWeight:600}}>{c.tag}</span><span style={{fontSize:11,color:'var(--text3)',marginLeft:'auto'}}>{c.d}</span></div>
 <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}>
 <div style={{flex:1,padding:'8px 12px',background:'var(--bg2)',borderRadius:8,fontSize:13,fontWeight:600,textAlign:'center'}}>{c.a}</div>
 <span style={{color:'var(--amber)',fontWeight:800,fontSize:16}}>⚡</span>
@@ -294,7 +366,7 @@ return(<div style={{minHeight:'100vh',display:'flex',alignItems:'center',justify
 }
 
 // ═══ Shell ═══
-function Shell(){const{pg,setPg,newN}=useApp();
+function Shell(){const{pg,setPg,newN,chatUn}=useApp();
 return(<div style={{paddingBottom:68,minHeight:'100vh',background:'var(--bg)'}}>
 <div style={{position:'sticky',top:0,zIndex:50,background:'rgba(250,250,247,.9)',backdropFilter:'blur(20px)',borderBottom:'1px solid var(--bg3)'}}>
 <div style={{maxWidth:580,margin:'0 auto',padding:'10px 16px',display:'flex',alignItems:'center',gap:8}}>
@@ -302,18 +374,19 @@ return(<div style={{paddingBottom:68,minHeight:'100vh',background:'var(--bg)'}}>
 <div style={{flex:1}}/><button className="btn btn-g btn-sm" onClick={()=>setPg('settings')} style={{fontSize:15,padding:3}}>⚙️</button>
 </div></div>
 <main style={{maxWidth:580,margin:'0 auto',padding:'0 16px'}}>
-{pg==='home'&&<Home/>}{pg==='signals'&&<Signals/>}{pg==='matches'&&<Matches/>}{pg==='connections'&&<Conns/>}{pg==='profile'&&<Profile/>}{pg==='settings'&&<Settings/>}
+{pg==='home'&&<Home/>}{pg==='search'&&<SearchPage/>}{pg==='chat'&&<ChatList/>}{pg==='chatroom'&&<ChatRoom/>}
+{pg==='signals'&&<Signals/>}{pg==='matches'&&<Matches/>}{pg==='connections'&&<Conns/>}{pg==='profile'&&<Profile/>}{pg==='settings'&&<Settings/>}
 </main>
 <nav className="bnav" role="navigation">
-{[{k:'home',i:'⚡',l:'매칭'},{k:'signals',i:'📡',l:'내 신호'},{k:'matches',i:'🎯',l:'받은매칭',b:newN},{k:'connections',i:'📖',l:'연결'},{k:'profile',i:'👤',l:'내정보'}].map(n=>(
-<div key={n.k} className={`ni ${pg===n.k?'on':''}`} onClick={()=>setPg(n.k)} role="button" tabIndex={0}>
+{[{k:'home',i:'⚡',l:'홈'},{k:'search',i:'🔍',l:'탐색'},{k:'chat',i:'💬',l:'채팅',b:chatUn},{k:'connections',i:'📖',l:'연결'},{k:'profile',i:'👤',l:'내정보'}].map(n=>(
+<div key={n.k} className={`ni ${pg===n.k||(n.k==='chat'&&pg==='chatroom')?'on':''}`} onClick={()=>setPg(n.k)} role="button" tabIndex={0}>
 <span className="ic">{n.i}</span><span>{n.l}</span>{n.b>0&&<span className="nbg">{n.b}</span>}
 </div>))}
 </nav></div>);
 }
 
 // ═══ Home ═══
-function Home(){const{setPg,setSelSig,setModal}=useApp();
+function Home(){const{setPg,setSelSig,setModal,chatUn}=useApp();
 const openSig=(s)=>{setSelSig(s);setModal('detail')};
 return(<div style={{paddingTop:16}}>
 <div style={{background:'linear-gradient(135deg,var(--navy),#16213e)',borderRadius:'var(--r)',padding:24,marginBottom:16,color:'#fff'}}>
@@ -322,6 +395,10 @@ return(<div style={{paddingTop:16}}>
 <div style={{textAlign:'right'}}><div style={{fontSize:11,color:'rgba(255,255,255,.5)'}}>내 신호</div><div style={{fontSize:11,color:'var(--amber)',fontWeight:600}}>📡 2개 활성</div></div>
 </div>
 <button className="btn btn-a btn-sm btn-w" onClick={()=>setPg('matches')}>새로운 매칭 확인하기 →</button>
+<div style={{display:'flex',gap:8,marginTop:8}}>
+<button className="btn btn-sm" style={{flex:1,background:'rgba(255,255,255,.15)',color:'#fff'}} onClick={()=>setPg('search')}>🔍 담당자 찾기</button>
+<button className="btn btn-sm" style={{flex:1,background:'rgba(255,255,255,.15)',color:'#fff'}} onClick={()=>setPg('chat')}>💬 채팅 {chatUn>0&&<span style={{background:'var(--coral)',borderRadius:8,padding:'1px 6px',fontSize:10,marginLeft:4}}>{chatUn}</span>}</button>
+</div>
 </div>
 
 <div style={{marginBottom:20}}>
@@ -329,7 +406,7 @@ return(<div style={{paddingTop:16}}>
 <h2 style={{fontSize:16,fontWeight:800}}>📡 당신을 찾고 있는 사람들</h2>
 <button className="btn btn-g btn-sm" onClick={()=>setPg('matches')} style={{fontSize:11}}>전체보기</button>
 </div>
-{SIGNALS.slice(0,4).map((sig,i)=>{const cat=gc(sig.cat);return(
+{SIGNALS.slice(0,6).map((sig,i)=>{const cat=gc(sig.cat);return(
 <div key={sig.id} className={`match-card au ${i<2?'hot':''}`} style={{padding:16,marginBottom:10,animationDelay:`${i*80}ms`,cursor:'pointer'}} onClick={()=>openSig(sig)}>
 <div style={{display:'flex',alignItems:'center',gap:12}}>
 <div className="score" style={{background:`linear-gradient(135deg,var(--amber),var(--coral))`}}>{sig.score}%</div>
@@ -350,7 +427,7 @@ return(<div style={{paddingTop:16}}>
 <div style={{marginBottom:20}}>
 <h2 style={{fontSize:16,fontWeight:800,marginBottom:12}}>🔥 지금 활발한 신호</h2>
 <div style={{display:'flex',gap:8,overflowX:'auto',paddingBottom:8}}>
-{SIGNALS.slice(4).map(sig=>{const cat=gc(sig.cat);return(
+{SIGNALS.slice(6).map(sig=>{const cat=gc(sig.cat);return(
 <div key={sig.id} style={{minWidth:200,padding:14,background:'var(--card)',borderRadius:'var(--r)',boxShadow:'var(--sh)',cursor:'pointer',border:'1px solid var(--bg3)',flexShrink:0}} onClick={()=>openSig(sig)}>
 <span className="badge" style={{background:cat.bg,color:cat.color,fontSize:10,marginBottom:6}}>{cat.icon} {cat.label}</span>
 <div style={{fontWeight:700,fontSize:13,marginBottom:2}}>{sig.co}</div>
@@ -463,8 +540,8 @@ fl.map((m,i)=>{const sig=m.sig;const cat=gc(sig.cat);const isNew=m.st==='new';re
 </div>
 {m.st!=='connected'?<div style={{display:'flex',gap:8}}>
 <button className="btn btn-o btn-sm" style={{flex:1}} onClick={()=>{setSelSig(sig);setModal('detail')}}>상세보기</button>
-<button className="btn btn-a btn-sm" style={{flex:2}} onClick={()=>connect(m.id)}>⚡ 연결하기</button>
-</div>:<div style={{padding:'10px 14px',background:'var(--teal-l)',borderRadius:8,fontSize:13,color:'var(--teal-d)',fontWeight:600}}>🤝 연결 완료!</div>}
+<button className="btn btn-a btn-sm" style={{flex:2}} onClick={()=>connect(m.id)}>⚡ 수락 & 채팅 시작</button>
+</div>:<div style={{padding:'10px 14px',background:'var(--teal-l)',borderRadius:8,fontSize:13,color:'var(--teal-d)',fontWeight:600}}>🤝 연결됨 — 💬 채팅에서 대화하세요</div>}
 </div>)})}
 </div>);
 }
@@ -504,12 +581,106 @@ return(<div style={{paddingTop:16}}>
 <div key={i} className="card" style={{padding:14,textAlign:'center'}}><div style={{fontSize:18,fontWeight:800,color:s.c}}>{s.v}</div><div style={{fontSize:11,color:'var(--text3)',marginTop:2}}>{s.l}</div></div>))}
 </div>
 <div className="card" style={{marginBottom:14}}>
-{[{i:'📡',l:'내 신호 관리',a:()=>setPg('signals')},{i:'⚙️',l:'설정',a:()=>setPg('settings')},{i:'💎',l:'구독 관리'}].map((m,i)=>(
-<div key={i} onClick={m.a} style={{padding:'14px 18px',display:'flex',alignItems:'center',gap:10,borderBottom:i<2?'1px solid var(--bg2)':'none',cursor:'pointer'}} onMouseEnter={e=>e.currentTarget.style.background='var(--bg2)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'}>
+{[{i:'📡',l:'내 신호 관리',a:()=>setPg('signals')},{i:'🎯',l:'받은 매칭',a:()=>setPg('matches')},{i:'💬',l:'채팅',a:()=>setPg('chat')},{i:'⚙️',l:'설정',a:()=>setPg('settings')}].map((m,i)=>(
+<div key={i} onClick={m.a} style={{padding:'14px 18px',display:'flex',alignItems:'center',gap:10,borderBottom:i<3?'1px solid var(--bg2)':'none',cursor:'pointer'}} onMouseEnter={e=>e.currentTarget.style.background='var(--bg2)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'}>
 <span style={{fontSize:16}}>{m.i}</span><span style={{fontSize:14,fontWeight:500,flex:1}}>{m.l}</span><span style={{color:'var(--text3)'}}>→</span>
 </div>))}
 </div>
 <button className="btn btn-o btn-w" style={{color:'var(--red)'}}>로그아웃</button>
+</div>);
+}
+
+// ═══ Search Page (탐색 — 회사/담당자 검색) ═══
+function SearchPage(){const{setSelSig,setModal}=useApp();
+const[q,setQ]=useState('');const[filter,setFilter]=useState('all');
+const fs=SIGNALS.filter(s=>{if(q){const lq=q.toLowerCase();return(s.name+s.co+s.dept+s.kw+s.desc).toLowerCase().includes(lq)}if(filter==='all')return true;return s.cat===filter});
+const fd=DIRECTORY.filter(d=>{if(!q)return false;const lq=q.toLowerCase();return(d.co+d.dept+d.people.map(p=>p.name+p.sig).join('')).toLowerCase().includes(lq)});
+const os=(s)=>{setSelSig(s);setModal('detail')};
+return(<div style={{paddingTop:16}}>
+<h2 style={{fontSize:18,fontWeight:800,marginBottom:14}}>🔍 탐색</h2>
+<input className="inp" value={q} onChange={e=>setQ(e.target.value)} placeholder="회사명, 부서, 업종, 키워드로 검색" style={{marginBottom:14,boxShadow:'var(--sh)'}}/>
+{!q&&<div style={{display:'flex',gap:6,flexWrap:'wrap',marginBottom:16}}>
+{[{k:'all',l:'전체'},...CATS.slice(0,6)].map(c=>(
+<button key={c.k||c.key} className={`btn btn-sm ${(filter===(c.k||c.key))?'btn-a':'btn-o'}`} onClick={()=>setFilter(c.k||c.key)} style={{fontSize:11,padding:'6px 12px',minHeight:32}}>{c.icon||''} {c.l||c.label}</button>))}
+</div>}
+{q&&fd.length>0&&<div style={{marginBottom:20}}>
+<h3 style={{fontSize:14,fontWeight:700,marginBottom:10,color:'var(--blue)'}}>🏢 회사 · 부서 · 담당자</h3>
+{fd.map((d,di)=>(
+<div key={di} className="card" style={{padding:16,marginBottom:8}}>
+<div style={{fontWeight:700,fontSize:14,marginBottom:4}}>{d.co} {d.dept&&<span style={{fontSize:12,color:'var(--text2)',fontWeight:400}}>· {d.dept}</span>}</div>
+{d.people.map((p,pi)=>(
+<div key={pi} style={{display:'flex',alignItems:'center',gap:10,padding:'8px 0',borderTop:pi?'1px solid var(--bg2)':'none'}}>
+<div style={{width:32,height:32,borderRadius:16,background:'var(--blue-l)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:14}}>👤</div>
+<div style={{flex:1}}><div style={{fontWeight:600,fontSize:13}}>{p.name} <span style={{fontSize:11,color:'var(--text3)',fontWeight:400}}>{p.pos}</span></div><div style={{fontSize:11,color:'var(--teal)'}}>📢 {p.sig}</div></div>
+<button className="btn btn-a btn-sm" style={{padding:'4px 10px',fontSize:10,minHeight:28}}>연결</button>
+</div>))}
+</div>))}
+</div>}
+<h3 style={{fontSize:14,fontWeight:700,marginBottom:10}}>{q?'📡 관련 신호':'📡 활성 신호'}</h3>
+{fs.length===0?<div style={{textAlign:'center',padding:40,color:'var(--text3)'}}><div style={{fontSize:40}}>🔍</div><p style={{marginTop:8}}>검색 결과가 없습니다</p></div>:
+fs.map((sig,i)=>{const cat=gc(sig.cat);return(
+<div key={sig.id} className="match-card au" style={{padding:14,marginBottom:8,animationDelay:`${i*50}ms`,cursor:'pointer'}} onClick={()=>os(sig)}>
+<div style={{display:'flex',alignItems:'center',gap:10}}>
+<div style={{width:40,height:40,borderRadius:20,background:cat.bg,display:'flex',alignItems:'center',justifyContent:'center',fontSize:18}}>{sig.av}</div>
+<div style={{flex:1}}>
+<div style={{fontWeight:700,fontSize:13}}>{sig.name} <span style={{fontSize:11,color:'var(--text3)',fontWeight:400}}>{sig.co}{sig.dept?' · '+sig.dept:''} · {sig.pos}</span></div>
+<div style={{fontSize:12,color:cat.color,fontWeight:600,marginTop:2}}>{cat.icon} {sig.kw}</div>
+</div>
+<span className="badge b-am" style={{fontSize:10}}>{sig.score}%</span>
+</div></div>)})}
+</div>);
+}
+
+// ═══ Chat List ═══
+function ChatList(){const{chats,setPg,setChatId}=useApp();
+const oc=(id)=>{setChatId(id);setPg('chatroom')};
+return(<div style={{paddingTop:16}}>
+<h2 style={{fontSize:18,fontWeight:800,marginBottom:14}}>💬 채팅</h2>
+<p style={{fontSize:13,color:'var(--text2)',marginBottom:16}}>매칭된 상대와 연락처 교환 전에 먼저 대화하세요</p>
+{chats.length===0?<div style={{textAlign:'center',padding:40,color:'var(--text3)'}}><div style={{fontSize:40}}>💬</div><p style={{fontWeight:600,color:'var(--text2)',marginTop:6}}>채팅이 없어요</p><p style={{fontSize:12,marginTop:4}}>매칭을 수락하면 채팅이 시작됩니다</p></div>:
+chats.map((c,i)=>(
+<div key={c.id} className="card au" style={{padding:16,marginBottom:8,animationDelay:`${i*50}ms`,cursor:'pointer'}} onClick={()=>oc(c.id)}>
+<div style={{display:'flex',alignItems:'center',gap:12}}>
+<div style={{position:'relative'}}>
+<div style={{width:48,height:48,borderRadius:24,background:'var(--amber-l)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:24}}>{c.av}</div>
+{c.unread>0&&<div style={{position:'absolute',top:-2,right:-2,width:20,height:20,borderRadius:10,background:'var(--coral)',color:'#fff',fontSize:10,fontWeight:700,display:'flex',alignItems:'center',justifyContent:'center',border:'2px solid var(--card)'}}>{c.unread}</div>}
+</div>
+<div style={{flex:1,minWidth:0}}>
+<div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:2}}>
+<span style={{fontWeight:700,fontSize:14}}>{c.name}</span>
+<span style={{fontSize:11,color:'var(--text3)',flexShrink:0}}>{c.lastAt}</span>
+</div>
+<div style={{fontSize:12,color:'var(--text2)',marginBottom:2}}>{c.co}</div>
+<div style={{fontSize:13,color:c.unread?'var(--text)':'var(--text3)',fontWeight:c.unread?600:400,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{c.lastMsg}</div>
+</div>
+</div></div>))}
+</div>);
+}
+
+// ═══ Chat Room ═══
+function ChatRoom(){const{chats,chatId,setPg,sendMsg}=useApp();
+const chat=chats.find(c=>c.id===chatId);const[txt,setTxt]=useState('');
+const ref=React.useRef(null);
+useEffect(()=>{if(ref.current)ref.current.scrollTop=ref.current.scrollHeight},[chat?.msgs?.length]);
+if(!chat)return null;
+const send=()=>{if(!txt.trim())return;sendMsg(chatId,txt.trim());setTxt('')};
+return(<div style={{paddingTop:8,display:'flex',flexDirection:'column',height:'calc(100vh - 130px)'}}>
+<div style={{display:'flex',alignItems:'center',gap:12,paddingBottom:12,borderBottom:'1px solid var(--bg3)',marginBottom:8}}>
+<button className="btn btn-g btn-sm" onClick={()=>setPg('chat')} style={{padding:4,fontSize:16}}>←</button>
+<div style={{width:36,height:36,borderRadius:18,background:'var(--amber-l)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:18}}>{chat.av}</div>
+<div><div style={{fontWeight:700,fontSize:14}}>{chat.name}</div><div style={{fontSize:11,color:'var(--text2)'}}>{chat.co}</div></div>
+</div>
+<div ref={ref} style={{flex:1,overflowY:'auto',padding:'8px 0',display:'flex',flexDirection:'column',gap:8}}>
+{chat.msgs.map(m=>(
+<div key={m.id} style={{display:'flex',flexDirection:'column',alignItems:m.from==='me'?'flex-end':'flex-start'}}>
+<div style={{maxWidth:'75%',padding:'10px 14px',borderRadius:14,fontSize:14,lineHeight:1.5,wordBreak:'break-word',background:m.from==='me'?'var(--amber)':'var(--bg2)',color:m.from==='me'?'#fff':'var(--text)',borderBottomRightRadius:m.from==='me'?4:14,borderBottomLeftRadius:m.from==='me'?14:4}}>{m.text}</div>
+<span style={{fontSize:10,color:'var(--text3)',marginTop:2,padding:'0 4px'}}>{m.at}</span>
+</div>))}
+</div>
+<div style={{display:'flex',gap:8,paddingTop:12,borderTop:'1px solid var(--bg3)'}}>
+<input className="inp" value={txt} onChange={e=>setTxt(e.target.value)} onKeyDown={e=>e.key==='Enter'&&send()} placeholder="메시지를 입력하세요" style={{flex:1}}/>
+<button className="btn btn-a btn-sm" onClick={send} disabled={!txt.trim()} style={{flexShrink:0}}>전송</button>
+</div>
 </div>);
 }
 

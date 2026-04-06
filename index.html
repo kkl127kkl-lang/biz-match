@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>BizMatch — 서로 찾는 비즈니스가 만나는 곳</title>
+<meta name="description" content="투자심사역은 CFO를 찾고, CFO는 투자심사역을 찾습니다. 서로 찾는 비즈니스를 동의 기반으로 연결합니다.">
+<meta name="theme-color" content="#1a1a2e">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#FAFAF7;--bg2:#F3F2EE;--bg3:#E5E3DC;--text:#1a1a2e;--text2:#4a4a5a;--text3:#8a8a9a;--navy:#1a1a2e;--navy2:#2d2d44;--amber:#E8A317;--amber-d:#C4880D;--amber-l:#FFF8E7;--amber-x:#FFFDF5;--teal:#0D9488;--teal-d:#0F766E;--teal-l:#CCFBF1;--coral:#E8634A;--coral-l:#FFEBE6;--blue:#4F6AF6;--blue-l:#E8ECFE;--violet:#7C5CFC;--violet-l:#EDE8FF;--red:#DC2626;--red-l:#FEE2E2;--card:#FFF;--sh:0 1px 3px rgba(26,26,46,.06),0 6px 16px rgba(26,26,46,.04);--sl:0 8px 40px rgba(26,26,46,.1);--r:16px;--rs:10px;--f:'Pretendard Variable','Pretendard',-apple-system,system-ui,sans-serif}
+html{scroll-behavior:smooth;overflow-x:hidden}body{font-family:var(--f);background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font-family:var(--f);cursor:pointer;border:none;background:none}input,textarea,select{font-family:var(--f);border:none;outline:none}
+::selection{background:var(--amber-l);color:var(--navy)}::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:2px}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:4px}
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fi{from{opacity:0}to{opacity:1}}@keyframes sr{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:translateX(0)}}
+@keyframes si{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+@keyframes gd{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes glow{0%,100%{box-shadow:0 0 8px rgba(232,163,23,.1)}50%{box-shadow:0 0 20px rgba(232,163,23,.25)}}
+.au{animation:fu .55s ease both}.asr{animation:sr .4s ease both}.asi{animation:si .3s ease both}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 26px;border-radius:var(--rs);font-weight:650;font-size:15px;transition:all .18s;white-space:nowrap;min-height:48px}
+.btn:active{transform:scale(.97);opacity:.85}.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+.btn-a{background:var(--amber);color:#fff}.btn-a:hover{background:var(--amber-d);transform:translateY(-2px);box-shadow:0 0 24px rgba(232,163,23,.2)}
+.btn-n{background:var(--navy);color:#fff}.btn-n:hover{background:var(--navy2)}.btn-t{background:var(--teal);color:#fff}.btn-t:hover{background:var(--teal-d)}
+.btn-o{border:1.5px solid var(--bg3);color:var(--text);background:var(--card)}.btn-o:hover{border-color:var(--amber);color:var(--amber)}
+.btn-g{color:var(--text2)}.btn-g:hover{background:var(--bg2)}
+.btn-sm{padding:8px 16px;font-size:13px;min-height:38px}.btn-lg{padding:16px 32px;font-size:17px;border-radius:var(--r)}.btn-xl{padding:18px 44px;font-size:18px;border-radius:var(--r);font-weight:700}.btn-w{width:100%}
+.inp{padding:14px 16px;border:1.5px solid var(--bg3);border-radius:var(--rs);font-size:15px;background:var(--card);transition:all .2s;width:100%;min-height:48px}
+.inp:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(232,163,23,.1)}.inp::placeholder{color:var(--text3)}
+.il{font-size:13px;font-weight:650;color:var(--text2);margin-bottom:6px;display:block}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:650}
+.b-am{background:var(--amber-l);color:var(--amber-d)}.b-tl{background:var(--teal-l);color:var(--teal-d)}.b-bl{background:var(--blue-l);color:var(--blue)}.b-vl{background:var(--violet-l);color:var(--violet)}.b-co{background:var(--coral-l);color:var(--coral)}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);transition:box-shadow .2s;overflow:hidden}.card:hover{box-shadow:var(--sl)}
+.ctn{max-width:1100px;margin:0 auto;padding:0 20px}
+.match-card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);border:1.5px solid transparent;transition:all .25s;overflow:hidden}
+.match-card:hover{box-shadow:var(--sl);border-color:var(--amber);transform:translateY(-2px)}
+.match-card.hot{border-color:var(--amber);animation:glow 3s ease infinite}
+.tab{display:flex;gap:2px;background:var(--bg2);border-radius:var(--rs);padding:3px}
+.ti{flex:1;padding:10px;text-align:center;border-radius:8px;font-size:13px;font-weight:650;color:var(--text3);transition:all .15s;cursor:pointer;min-height:40px;display:flex;align-items:center;justify-content:center}.ti.on{background:var(--card);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-top:1px solid var(--bg3);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom)}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0 6px;font-size:10px;font-weight:650;color:var(--text3);cursor:pointer;position:relative;min-height:52px;justify-content:center}.ni.on{color:var(--amber)}.ni .ic{font-size:21px}
+.nbg{position:absolute;top:2px;right:50%;margin-right:-12px;min-width:18px;height:18px;background:var(--coral);color:#fff;border-radius:9px;font-size:9px;display:flex;align-items:center;justify-content:center;padding:0 5px;font-weight:700}
+.mdo{position:fixed;inset:0;background:rgba(26,26,46,.4);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);animation:fi .15s}
+.mdc{background:var(--card);border-radius:var(--r);max-width:480px;width:100%;max-height:90vh;overflow-y:auto;animation:si .25s ease}
+.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:14px 24px;border-radius:var(--r);font-size:14px;font-weight:500;z-index:2000;animation:fu .3s ease;box-shadow:var(--sl);max-width:90%;display:flex;align-items:center;gap:8px}
+.score{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+@media(max-width:768px){.ctn{padding:0 16px}.btn-xl{padding:15px 28px;font-size:16px}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const{useState,useEffect,useCallback,createContext,useContext}=React;
+const Ctx=createContext();const useApp=()=>useContext(Ctx);
+
+const CATS=[
+{key:'supply',label:'공급업체 찾기',icon:'🏭',color:'var(--teal)',bg:'var(--teal-l)',pair:'buyer'},
+{key:'buyer',label:'구매처 찾기',icon:'🛒',color:'var(--blue)',bg:'var(--blue-l)',pair:'supply'},
+{key:'invest',label:'투자 유치',icon:'💰',color:'var(--amber)',bg:'var(--amber-l)',pair:'investor'},
+{key:'investor',label:'투자처 찾기',icon:'📊',color:'var(--violet)',bg:'var(--violet-l)',pair:'invest'},
+{key:'partner',label:'파트너십',icon:'🤝',color:'var(--coral)',bg:'var(--coral-l)',pair:'partner'},
+{key:'talent',label:'인재 채용',icon:'👥',color:'var(--navy)',bg:'var(--bg2)',pair:'job'},
+{key:'export',label:'수출 파트너',icon:'🌏',color:'var(--teal)',bg:'var(--teal-l)',pair:'import'},
+{key:'import',label:'수입/바이어',icon:'📦',color:'var(--blue)',bg:'var(--blue-l)',pair:'export'},
+];
+const gc=k=>CATS.find(c=>c.key===k)||CATS[0];
+
+const SIGNALS=[
+{id:'s1',name:'김영호',av:'👨‍💼',co:'삼성전자',dept:'구매팀',pos:'과장',cat:'supply',kw:'반도체 세정 소재',desc:'웨이퍼 세정용 화학소재 공급업체를 찾고 있습니다. 월 5톤+ 납품 가능한 곳.',exp:'D-23',v:true,score:94,region:'전국',budget:'연 50억+'},
+{id:'s2',name:'이준혁',av:'👨‍💼',co:'현대자동차',dept:'구매팀',pos:'차장',cat:'supply',kw:'NCM 양극재',desc:'배터리용 NCM 양극재 납품 가능한 업체. 2차전지 소재 전문업체 우대.',exp:'D-15',v:true,score:87,region:'전국',budget:'연 200억+'},
+{id:'s3',name:'박수진',av:'👩‍💻',co:'네이버',dept:'AI Lab',pos:'팀장',cat:'partner',kw:'AI 산학협력',desc:'LLM 경량화 산학 협력 파트너. 대학 연구실 또는 AI 스타트업.',exp:'D-30',v:true,score:78,region:'서울/판교'},
+{id:'s4',name:'최민서',av:'👩‍💼',co:'토스',dept:'사업개발팀',pos:'매니저',cat:'partner',kw:'핀테크 API 연동',desc:'PG 결제 연동 파트너. 간편결제/해외결제 솔루션 보유 업체.',exp:'D-20',v:true,score:91,region:'서울'},
+{id:'s5',name:'한지영',av:'👩‍🔧',co:'쿠팡',dept:'물류기술팀',pos:'시니어엔지니어',cat:'supply',kw:'물류 자동화 로봇',desc:'풀필먼트센터용 AMR/AGV 공급업체. PoC 가능한 곳.',exp:'D-18',v:true,score:83,region:'경기'},
+{id:'s6',name:'오승민',av:'👨‍💼',co:'LG전자',dept:'영업팀',pos:'부장',cat:'buyer',kw:'디스플레이 솔루션',desc:'B2B 대형 디스플레이 도입할 기업. 리테일/호텔/오피스.',exp:'D-25',v:true,score:76,region:'전국'},
+{id:'s7',name:'정현우',av:'👨‍💻',co:'AI스타트업',dept:'',pos:'CEO',cat:'invest',kw:'시리즈A 투자유치',desc:'AI 영상분석. ARR 12억, MoM 15% 성장. 시리즈A 50억 목표.',exp:'D-28',v:true,score:88,region:'서울'},
+{id:'s8',name:'강태호',av:'👨‍🍳',co:'배달의민족',dept:'상점개발팀',pos:'팀장',cat:'partner',kw:'프랜차이즈 제휴',desc:'외식 프랜차이즈 본사 제휴. 가맹점 50개+ 브랜드.',exp:'D-12',v:true,score:82,region:'전국'},
+];
+
+const MY_SIG=[
+{id:'ms1',cat:'supply',kw:'AI SaaS 솔루션',desc:'B2B AI 자동화 솔루션 제공. 문서 분석, 고객 응대 자동화.',status:'active',views:23,matches:5},
+{id:'ms2',cat:'investor',kw:'AI/핀테크 시리즈A',desc:'AI·핀테크 초기 스타트업 투자. 5~30억 규모.',status:'active',views:47,matches:12},
+];
+
+const INIT_MATCHES=[
+{id:'m1',sig:SIGNALS[0],mySig:MY_SIG[0],score:94,st:'new',at:'2026-04-01'},
+{id:'m2',sig:SIGNALS[3],mySig:MY_SIG[0],score:91,st:'new',at:'2026-04-02'},
+{id:'m3',sig:SIGNALS[6],mySig:MY_SIG[1],score:88,st:'viewed',at:'2026-03-30'},
+{id:'m4',sig:SIGNALS[4],mySig:MY_SIG[0],score:83,st:'viewed',at:'2026-03-28'},
+];
+
+function App(){
+const[pg,setPg]=useState('landing');
+const[user,setUser]=useState(null);
+const[toast,setToast]=useState(null);
+const[matches,setMatches]=useState(INIT_MATCHES);
+const[conns,setConns]=useState([{id:'cn1',name:'오승민',co:'LG전자',dept:'영업팀',pos:'부장',ph:'010-3456-7890',av:'👨‍💼',at:'2026-03-25',ctx:'디스플레이 솔루션 ↔ AI SaaS',memo:'미팅 4/10 예정'}]);
+const[modal,setModal]=useState(null);
+const[selSig,setSelSig]=useState(null);
+
+const st=useCallback((m,d=3000)=>{setToast(m);setTimeout(()=>setToast(null),d)},[]);
+const login=()=>{setUser({id:'me',name:'나현준',co:'스타트업허브',dept:'사업개발팀',pos:'대표',av:'😎',plan:'PRO'});setPg('home');st('⚡ 환영합니다! 새로운 매칭 3건이 있습니다')};
+const newN=matches.filter(m=>m.st==='new').length;
+const connect=(mid)=>{
+const m=matches.find(x=>x.id===mid);if(!m)return;
+setMatches(p=>p.map(x=>x.id===mid?{...x,st:'connected'}:x));
+setConns(p=>[{id:'cn'+Date.now(),name:m.sig.name,co:m.sig.co,dept:m.sig.dept,pos:m.sig.pos,ph:'010-'+Math.floor(1e3+Math.random()*9e3)+'-'+Math.floor(1e3+Math.random()*9e3),av:m.sig.av,at:new Date().toISOString().split('T')[0],ctx:m.sig.kw+' ↔ '+m.mySig.kw,memo:''},...p]);
+st('🎉 연결 완료! 연락처가 상호 공개됩니다');};
+
+const ctx={pg,setPg,user,login,toast,st,matches,setMatches,conns,setConns,modal,setModal,selSig,setSelSig,newN,connect};
+return(<Ctx.Provider value={ctx}>
+{pg==='landing'&&<Landing/>}{pg==='login'&&<Login/>}{pg==='signup'&&<Signup/>}
+{user&&['home','signals','matches','connections','profile','settings'].includes(pg)&&<Shell/>}
+{modal==='detail'&&selSig&&<SigDetail/>}
+{modal==='connect'&&selSig&&<ConnModal/>}
+{toast&&<div className="toast" role="alert">{toast}</div>}
+</Ctx.Provider>);
+}
+
+// ═══ Landing ═══
+function Landing(){
+const{setPg}=useApp();const[sy,setSy]=useState(0);const[n,setN]=useState(6847);
+useEffect(()=>{const h=()=>setSy(window.scrollY);window.addEventListener('scroll',h,{passive:true});return()=>window.removeEventListener('scroll',h)},[]);
+useEffect(()=>{const t=setInterval(()=>setN(p=>p+Math.floor(Math.random()*3)),7000);return()=>clearInterval(t)},[]);
+return(<div style={{background:'var(--bg)'}}>
+<nav style={{position:'fixed',top:0,left:0,right:0,zIndex:100,background:sy>50?'rgba(250,250,247,.9)':'transparent',backdropFilter:sy>50?'blur(24px)':'none',borderBottom:sy>50?'1px solid var(--bg3)':'none',transition:'all .3s'}}>
+<div className="ctn" style={{display:'flex',alignItems:'center',justifyContent:'space-between',height:60}}>
+<div style={{display:'flex',alignItems:'center',gap:8,fontWeight:800,fontSize:20}}>⚡ <span>Biz<span style={{color:'var(--amber)'}}>Match</span></span></div>
+<div style={{display:'flex',gap:6}}><button className="btn btn-g btn-sm" onClick={()=>setPg('login')}>로그인</button><button className="btn btn-a btn-sm" onClick={()=>setPg('signup')}>무료 시작 →</button></div>
+</div></nav>
+
+<header style={{paddingTop:120,paddingBottom:80,position:'relative'}}>
+<div style={{position:'absolute',inset:0,background:'radial-gradient(ellipse at 20% 30%,rgba(232,163,23,.06) 0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(13,148,136,.05) 0%,transparent 50%)',pointerEvents:'none'}}/>
+<div className="ctn" style={{position:'relative'}}>
+<div style={{maxWidth:640}}>
+<div className="au" style={{animationDelay:'.1s'}}><span className="badge b-am" style={{fontSize:13,padding:'6px 16px',marginBottom:20}}>⚡ 양방향 비즈니스 매칭 플랫폼</span></div>
+<h1 className="au" style={{animationDelay:'.2s',fontSize:'clamp(32px,5.5vw,54px)',fontWeight:800,lineHeight:1.12,letterSpacing:'-2px',marginBottom:20}}>서로 찾는 비즈니스가<br/><span style={{background:'linear-gradient(135deg,var(--amber),var(--coral))',backgroundSize:'200% 200%',animation:'gd 4s ease infinite',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}>여기서 만납니다</span></h1>
+<p className="au" style={{animationDelay:'.3s',fontSize:'clamp(16px,2.5vw,20px)',color:'var(--text2)',lineHeight:1.7,marginBottom:32}}>
+투자심사역은 CFO를 찾고, CFO는 투자심사역을 찾습니다.<br/>
+구매담당자는 공급업체를 찾고, 공급업체는 구매담당자를 찾습니다.<br/>
+<strong style={{color:'var(--text)'}}>서로 찾고 있지만 아직 만나지 못한 사람들</strong>을 연결합니다.
+</p>
+<div className="au" style={{animationDelay:'.4s',display:'flex',gap:12,flexWrap:'wrap',marginBottom:16}}>
+<button className="btn btn-a btn-xl" onClick={()=>setPg('signup')}>매칭 시작하기 →</button>
+<button className="btn btn-o btn-lg" onClick={()=>document.getElementById('how')?.scrollIntoView({behavior:'smooth'})}>어떻게 작동하나요?</button>
+</div>
+<div className="au" style={{animationDelay:'.5s',display:'flex',alignItems:'center',gap:12,fontSize:13,color:'var(--text3)'}}>
+<div style={{display:'flex'}}>{['👨‍💼','👩‍💻','👨‍🍳','👩‍💼','🧑‍🔬'].map((a,i)=><div key={i} style={{width:28,height:28,borderRadius:14,background:['var(--amber-l)','var(--teal-l)','var(--blue-l)','var(--violet-l)','var(--coral-l)'][i],display:'flex',alignItems:'center',justifyContent:'center',fontSize:14,marginLeft:i?-8:0,border:'2px solid var(--bg)',zIndex:5-i}}>{a}</div>)}</div>
+<span>지금 <strong style={{color:'var(--amber)'}}>{n.toLocaleString()}명</strong>이 서로를 찾는 중</span>
+</div>
+</div>
+</div>
+</header>
+
+{/* Problem */}
+<section style={{padding:'64px 0',background:'var(--navy)',color:'#fff'}}>
+<div className="ctn">
+<div style={{textAlign:'center',marginBottom:40}}><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>양쪽 다 간절한데,<br/>서로를 못 찾고 있습니다</h2></div>
+<div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:16}}>
+{[{a:'투자심사역',b:'CFO/창업자',icon:'💰 ↔ 📊',pain:'서로 만나려면 지인 소개 3단계, 2~4주'},{a:'구매담당자',b:'공급업체',icon:'🛒 ↔ 🏭',pain:'구매는 검색만, 영업은 콜드콜. 접점 없음'},{a:'무역상',b:'제조사',icon:'🌏 ↔ 📦',pain:'전시회 아니면 방법이 없음'},{a:'인사팀',b:'인재',icon:'👥 ↔ 💼',pain:'채용사이트는 일방통행. 실무자를 못 만남'}].map((x,i)=>(
+<div key={i} style={{background:'rgba(255,255,255,.06)',borderRadius:'var(--r)',padding:22,border:'1px solid rgba(255,255,255,.08)',textAlign:'center'}}>
+<div style={{fontSize:22,marginBottom:6}}>{x.icon}</div>
+<div style={{marginBottom:6}}><span style={{fontWeight:700}}>{x.a}</span> <span style={{color:'var(--amber)',fontWeight:800}}>⚡</span> <span style={{fontWeight:700}}>{x.b}</span></div>
+<p style={{fontSize:13,color:'rgba(255,255,255,.6)',lineHeight:1.5}}>{x.pain}</p>
+</div>))}
+</div>
+<div style={{textAlign:'center',marginTop:32}}><div style={{display:'inline-block',background:'rgba(232,163,23,.15)',borderRadius:'var(--r)',padding:'14px 28px',fontSize:15,color:'var(--amber)',fontWeight:600}}>⚡ BizMatch는 이 양쪽을 동의 기반으로 연결합니다</div></div>
+</div></section>
+
+{/* How */}
+<section id="how" style={{padding:'72px 0'}}>
+<div className="ctn">
+<div style={{textAlign:'center',marginBottom:48}}><div className="badge b-am" style={{marginBottom:12}}>HOW IT WORKS</div><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>3단계로 파트너를 만나세요</h2></div>
+<div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:20}}>
+{[{s:'01',icon:'📡',t:'신호를 켜세요',d:'"배터리 소재 공급업체를 찾습니다"\n"시리즈A 투자를 유치하고 싶습니다"\n무엇을 찾는지 알려주세요.',c:'var(--amber)'},{s:'02',icon:'⚡',t:'매칭을 받으세요',d:'당신이 찾는 것 ↔ 상대가 찾는 것이\n일치하면 자동 매칭됩니다.\n양쪽 모두에게 알림이 갑니다.',c:'var(--teal)'},{s:'03',icon:'🤝',t:'연결하세요',d:'양쪽이 모두 수락하면\n연락처가 상호 공개됩니다.\n거래를 시작하세요!',c:'var(--blue)'}].map((s,i)=>(
+<div key={i} className="card" style={{padding:28,textAlign:'center',borderTop:`3px solid ${s.c}`,position:'relative'}}>
+<div style={{fontSize:44,marginBottom:12}}>{s.icon}</div>
+<h3 style={{fontWeight:700,fontSize:18,marginBottom:8}}>{s.t}</h3>
+<p style={{fontSize:14,color:'var(--text2)',whiteSpace:'pre-line',lineHeight:1.6}}>{s.d}</p>
+</div>))}
+</div></div></section>
+
+{/* Comparison */}
+<section style={{padding:'72px 0',background:'var(--bg2)'}}>
+<div className="ctn">
+<div style={{textAlign:'center',marginBottom:40}}><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>기존 서비스와 완전히 다릅니다</h2></div>
+<div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:16}}>
+{[{n:'리멤버',i:'📇',w:'이미 만난 사람 관리',l:'새로운 거래처는 못 찾음'},{n:'LinkedIn',i:'🔗',w:'나를 보여주는 SNS',l:'담당자 전화번호 불가능'},{n:'ZoomInfo',i:'💾',w:'동의 없이 크롤링',l:'한국 40%, 월 $200+'},{n:'BizMatch',i:'⚡',w:'서로 찾는 사람을 매칭',l:'양쪽 동의 + 무료 시작',hl:true}].map((s,i)=>(
+<div key={i} className="card" style={{padding:22,border:s.hl?'2px solid var(--amber)':'none',background:s.hl?'var(--amber-x)':'var(--card)'}}>
+<div style={{fontSize:28,marginBottom:8}}>{s.i}</div>
+<div style={{fontWeight:700,fontSize:16,marginBottom:4}}>{s.n}</div>
+<div style={{fontSize:13,color:'var(--text2)',marginBottom:6}}>{s.w}</div>
+<div style={{fontSize:12,color:s.hl?'var(--amber-d)':'var(--text3)',fontWeight:s.hl?600:400}}>{s.l}</div>
+</div>))}
+</div></div></section>
+
+{/* Cases */}
+<section style={{padding:'72px 0'}}>
+<div className="ctn">
+<div style={{textAlign:'center',marginBottom:40}}><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>실제 매칭 사례</h2></div>
+<div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:16}}>
+{[{a:'삼성전자 구매팀',b:'A화학 영업팀',r:'웨이퍼 소재 연간 계약',t:'구매↔공급',d:'매칭 후 3일 만에 미팅'},{a:'AI 스타트업 CEO',b:'한국투자 심사역',r:'시리즈A 30억 투자 유치',t:'투자유치↔투자처',d:'매칭 후 1주 만에 TS'},{a:'쿠팡 물류팀',b:'로봇 제조사',r:'풀필먼트 자동화 PoC',t:'구매↔공급',d:'매칭 후 5일 만에 방문'}].map((c,i)=>(
+<div key={i} className="card" style={{padding:24}}>
+<div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}><span className="badge b-am" style={{fontSize:10}}>{c.t}</span><span style={{fontSize:11,color:'var(--text3)'}}>{c.d}</span></div>
+<div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}>
+<div style={{flex:1,padding:'8px 12px',background:'var(--bg2)',borderRadius:8,fontSize:13,fontWeight:600,textAlign:'center'}}>{c.a}</div>
+<span style={{color:'var(--amber)',fontWeight:800,fontSize:16}}>⚡</span>
+<div style={{flex:1,padding:'8px 12px',background:'var(--bg2)',borderRadius:8,fontSize:13,fontWeight:600,textAlign:'center'}}>{c.b}</div>
+</div>
+<p style={{fontSize:14,fontWeight:700,color:'var(--teal)'}}>{c.r}</p>
+</div>))}
+</div></div></section>
+
+{/* CTA */}
+<section style={{padding:'80px 0',background:'var(--navy)',color:'#fff',textAlign:'center'}}>
+<div className="ctn">
+<div style={{fontSize:48,marginBottom:16}}>⚡</div>
+<h2 style={{fontSize:'clamp(24px,5vw,40px)',fontWeight:800,marginBottom:12}}>당신이 찾는 사람도,<br/>당신을 찾고 있습니다</h2>
+<p style={{color:'rgba(255,255,255,.6)',marginBottom:32,fontSize:17}}>신호를 켜세요. 매칭이 시작됩니다.</p>
+<button className="btn btn-a btn-xl" onClick={()=>setPg('signup')}>무료로 매칭 시작하기 →</button>
+<div style={{marginTop:12,fontSize:13,color:'rgba(255,255,255,.4)'}}>✓ 무료 시작 · ✓ 양쪽 동의 필수 · ✓ 연락처 안전 보호</div>
+</div></section>
+<footer style={{padding:'28px 0',borderTop:'1px solid var(--bg3)',textAlign:'center',fontSize:12,color:'var(--text3)'}}>© 2026 BizMatch. All rights reserved.</footer>
+</div>);
+}
+
+// ═══ Login ═══
+function Login(){const{setPg,login}=useApp();const[ld,setLd]=useState(false);
+const go=()=>{setLd(true);setTimeout(()=>{login();setLd(false)},500)};
+return(<div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',padding:20}}>
+<div className="asi" style={{maxWidth:400,width:'100%'}}>
+<div style={{textAlign:'center',marginBottom:28}}><div style={{fontSize:36,cursor:'pointer'}} onClick={()=>setPg('landing')}>⚡</div><h1 style={{fontSize:22,fontWeight:800,marginTop:4}}>로그인</h1></div>
+<div className="card" style={{padding:26}}>
+<div style={{marginBottom:14}}><span className="il">이메일</span><input className="inp" defaultValue="demo@bizmatch.kr"/></div>
+<div style={{marginBottom:20}}><span className="il">비밀번호</span><input className="inp" type="password" defaultValue="password"/></div>
+<button className="btn btn-a btn-w" onClick={go} disabled={ld}>{ld?'로그인 중...':'로그인'}</button>
+<div style={{margin:'16px 0',textAlign:'center',fontSize:11,color:'var(--text3)'}}>또는</div>
+<button className="btn btn-o btn-w" onClick={go} style={{background:'#FEE500',border:'none',color:'#000',marginBottom:8}}>💬 카카오</button>
+<button className="btn btn-o btn-w" onClick={go}>🔵 Google</button>
+</div>
+<p style={{textAlign:'center',marginTop:14,fontSize:13}}>계정이 없나요? <span style={{color:'var(--amber)',fontWeight:600,cursor:'pointer'}} onClick={()=>setPg('signup')}>회원가입</span></p>
+</div></div>);
+}
+
+// ═══ Signup (핵심: "무엇을 찾고 있나요?") ═══
+function Signup(){const{setPg,login}=useApp();const[s,setS]=useState(1);const[cats,setCats]=useState([]);
+const tg=k=>setCats(p=>p.includes(k)?p.filter(x=>x!==k):[...p,k]);
+return(<div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',padding:20}}>
+<div className="asi" style={{maxWidth:460,width:'100%'}}>
+<div style={{textAlign:'center',marginBottom:20}}><div style={{fontSize:36,cursor:'pointer'}} onClick={()=>setPg('landing')}>⚡</div><h1 style={{fontSize:22,fontWeight:800,marginTop:4}}>매칭 시작하기</h1>
+<div style={{display:'flex',gap:4,justifyContent:'center',marginTop:10}}>{[1,2,3].map(x=><div key={x} style={{width:x===s?40:20,height:4,borderRadius:2,background:x<=s?'var(--amber)':'var(--bg3)',transition:'all .3s'}}/>)}</div>
+<div style={{fontSize:11,color:'var(--text3)',marginTop:6}}>{['나는 누구인가요?','무엇을 찾고 있나요?','구체적으로 알려주세요'][s-1]}</div>
+</div>
+<div className="card" style={{padding:26}}>
+{s===1&&<div className="asr">
+<div style={{marginBottom:10}}><span className="il">이름</span><input className="inp" placeholder="홍길동"/></div>
+<div style={{marginBottom:10}}><span className="il">회사명</span><input className="inp" placeholder="소속 회사"/></div>
+<div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginBottom:10}}>
+<div><span className="il">부서</span><input className="inp" placeholder="영업팀"/></div>
+<div><span className="il">직책</span><input className="inp" placeholder="과장"/></div>
+</div>
+<div style={{marginBottom:18}}><span className="il">업종</span><input className="inp" placeholder="IT/SaaS, 제조, 식품 등"/></div>
+<button className="btn btn-a btn-w" onClick={()=>setS(2)}>다음 →</button>
+</div>}
+{s===2&&<div className="asr">
+<p style={{fontSize:14,fontWeight:700,marginBottom:4}}>지금 무엇을 찾고 있나요?</p>
+<p style={{fontSize:13,color:'var(--text2)',marginBottom:16}}>해당하는 것을 모두 선택하세요</p>
+<div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginBottom:20}}>
+{CATS.map(c=>{const on=cats.includes(c.key);return(
+<button key={c.key} onClick={()=>tg(c.key)} style={{display:'flex',alignItems:'center',gap:6,padding:'10px 14px',borderRadius:'var(--rs)',border:`1.5px solid ${on?c.color:'var(--bg3)'}`,background:on?c.bg:'var(--card)',color:on?c.color:'var(--text2)',fontSize:13,fontWeight:600,textAlign:'left',cursor:'pointer',transition:'all .15s'}}>
+<span style={{fontSize:16}}>{c.icon}</span>{c.label}
+</button>)})}
+</div>
+<div style={{display:'flex',gap:8}}><button className="btn btn-o" style={{flex:1}} onClick={()=>setS(1)}>←</button><button className="btn btn-a" style={{flex:2}} onClick={()=>setS(3)} disabled={!cats.length}>다음 →</button></div>
+</div>}
+{s===3&&<div className="asr">
+<p style={{fontSize:14,fontWeight:700,marginBottom:12}}>찾는 내용을 구체적으로 적어주세요</p>
+{cats.slice(0,3).map(ck=>{const c=gc(ck);return(
+<div key={ck} style={{marginBottom:14}}>
+<div style={{display:'flex',alignItems:'center',gap:6,marginBottom:6}}><span>{c.icon}</span><span className="il" style={{marginBottom:0}}>{c.label}</span></div>
+<textarea className="inp" placeholder="구체적일수록 매칭 정확도가 높아집니다" rows={2} style={{resize:'none',fontSize:13}}/>
+</div>)})}
+<div style={{display:'flex',gap:8}}><button className="btn btn-o" style={{flex:1}} onClick={()=>setS(2)}>←</button><button className="btn btn-a" style={{flex:2}} onClick={login}>⚡ 매칭 시작!</button></div>
+</div>}
+</div></div></div>);
+}
+
+// ═══ Shell ═══
+function Shell(){const{pg,setPg,newN}=useApp();
+return(<div style={{paddingBottom:68,minHeight:'100vh',background:'var(--bg)'}}>
+<div style={{position:'sticky',top:0,zIndex:50,background:'rgba(250,250,247,.9)',backdropFilter:'blur(20px)',borderBottom:'1px solid var(--bg3)'}}>
+<div style={{maxWidth:580,margin:'0 auto',padding:'10px 16px',display:'flex',alignItems:'center',gap:8}}>
+<div style={{fontWeight:800,fontSize:17}}>⚡ Biz<span style={{color:'var(--amber)'}}>Match</span></div>
+<div style={{flex:1}}/><button className="btn btn-g btn-sm" onClick={()=>setPg('settings')} style={{fontSize:15,padding:3}}>⚙️</button>
+</div></div>
+<main style={{maxWidth:580,margin:'0 auto',padding:'0 16px'}}>
+{pg==='home'&&<Home/>}{pg==='signals'&&<Signals/>}{pg==='matches'&&<Matches/>}{pg==='connections'&&<Conns/>}{pg==='profile'&&<Profile/>}{pg==='settings'&&<Settings/>}
+</main>
+<nav className="bnav" role="navigation">
+{[{k:'home',i:'⚡',l:'매칭'},{k:'signals',i:'📡',l:'내 신호'},{k:'matches',i:'🎯',l:'받은매칭',b:newN},{k:'connections',i:'📖',l:'연결'},{k:'profile',i:'👤',l:'내정보'}].map(n=>(
+<div key={n.k} className={`ni ${pg===n.k?'on':''}`} onClick={()=>setPg(n.k)} role="button" tabIndex={0}>
+<span className="ic">{n.i}</span><span>{n.l}</span>{n.b>0&&<span className="nbg">{n.b}</span>}
+</div>))}
+</nav></div>);
+}
+
+// ═══ Home ═══
+function Home(){const{setPg,setSelSig,setModal}=useApp();
+const openSig=(s)=>{setSelSig(s);setModal('detail')};
+return(<div style={{paddingTop:16}}>
+<div style={{background:'linear-gradient(135deg,var(--navy),#16213e)',borderRadius:'var(--r)',padding:24,marginBottom:16,color:'#fff'}}>
+<div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:12}}>
+<div><div style={{fontSize:13,color:'rgba(255,255,255,.6)'}}>오늘의 매칭</div><div style={{fontSize:32,fontWeight:800,marginTop:2}}>3<span style={{fontSize:16,fontWeight:400,marginLeft:4}}>건</span></div></div>
+<div style={{textAlign:'right'}}><div style={{fontSize:11,color:'rgba(255,255,255,.5)'}}>내 신호</div><div style={{fontSize:11,color:'var(--amber)',fontWeight:600}}>📡 2개 활성</div></div>
+</div>
+<button className="btn btn-a btn-sm btn-w" onClick={()=>setPg('matches')}>새로운 매칭 확인하기 →</button>
+</div>
+
+<div style={{marginBottom:20}}>
+<div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:12}}>
+<h2 style={{fontSize:16,fontWeight:800}}>📡 당신을 찾고 있는 사람들</h2>
+<button className="btn btn-g btn-sm" onClick={()=>setPg('matches')} style={{fontSize:11}}>전체보기</button>
+</div>
+{SIGNALS.slice(0,4).map((sig,i)=>{const cat=gc(sig.cat);return(
+<div key={sig.id} className={`match-card au ${i<2?'hot':''}`} style={{padding:16,marginBottom:10,animationDelay:`${i*80}ms`,cursor:'pointer'}} onClick={()=>openSig(sig)}>
+<div style={{display:'flex',alignItems:'center',gap:12}}>
+<div className="score" style={{background:`linear-gradient(135deg,var(--amber),var(--coral))`}}>{sig.score}%</div>
+<div style={{flex:1}}>
+<div style={{display:'flex',alignItems:'center',gap:6,marginBottom:2}}>
+<span style={{fontWeight:700,fontSize:14}}>{sig.co}</span>
+<span style={{fontSize:11,color:'var(--text3)'}}>{sig.dept} · {sig.pos}</span>
+{sig.v&&<span style={{fontSize:10}}>✅</span>}
+</div>
+<div style={{fontSize:13,fontWeight:600,color:cat.color}}>{cat.icon} {sig.kw}</div>
+<div style={{fontSize:12,color:'var(--text2)',marginTop:2,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{sig.desc}</div>
+</div>
+<span style={{fontSize:10,color:'var(--coral)',fontWeight:600,flexShrink:0}}>{sig.exp}</span>
+</div>
+</div>)})}
+</div>
+
+<div style={{marginBottom:20}}>
+<h2 style={{fontSize:16,fontWeight:800,marginBottom:12}}>🔥 지금 활발한 신호</h2>
+<div style={{display:'flex',gap:8,overflowX:'auto',paddingBottom:8}}>
+{SIGNALS.slice(4).map(sig=>{const cat=gc(sig.cat);return(
+<div key={sig.id} style={{minWidth:200,padding:14,background:'var(--card)',borderRadius:'var(--r)',boxShadow:'var(--sh)',cursor:'pointer',border:'1px solid var(--bg3)',flexShrink:0}} onClick={()=>openSig(sig)}>
+<span className="badge" style={{background:cat.bg,color:cat.color,fontSize:10,marginBottom:6}}>{cat.icon} {cat.label}</span>
+<div style={{fontWeight:700,fontSize:13,marginBottom:2}}>{sig.co}</div>
+<div style={{fontSize:12,color:'var(--text2)',marginBottom:4}}>{sig.kw}</div>
+<div style={{fontSize:10,color:'var(--text3)'}}>{sig.name} · {sig.exp}</div>
+</div>)})}
+</div></div>
+
+<div><h2 style={{fontSize:16,fontWeight:800,marginBottom:12}}>🏷️ 카테고리별 탐색</h2>
+<div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:8}}>
+{CATS.slice(0,6).map(c=>(
+<button key={c.key} className="card" style={{padding:14,textAlign:'center',cursor:'pointer',border:'none'}} onClick={()=>setPg('matches')}>
+<div style={{fontSize:24,marginBottom:4}}>{c.icon}</div><div style={{fontSize:11,fontWeight:600,color:'var(--text2)'}}>{c.label}</div>
+</button>))}
+</div></div>
+</div>);
+}
+
+// ═══ Signal Detail ═══
+function SigDetail(){const{selSig:s,setModal,setSelSig}=useApp();if(!s)return null;const cat=gc(s.cat);
+return(<div className="mdo" onClick={()=>setModal(null)}>
+<div className="mdc" onClick={e=>e.stopPropagation()} style={{padding:0}}>
+<div style={{background:'linear-gradient(135deg,var(--navy),#16213e)',padding:24,color:'#fff',borderRadius:'var(--r) var(--r) 0 0'}}>
+<div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}>
+<div><div style={{fontSize:12,color:'rgba(255,255,255,.6)'}}>매칭률</div><div style={{fontSize:36,fontWeight:900}}>{s.score}<span style={{fontSize:16}}>%</span></div></div>
+<button onClick={()=>setModal(null)} style={{color:'rgba(255,255,255,.5)',fontSize:18,minWidth:36,minHeight:36,display:'flex',alignItems:'center',justifyContent:'center'}}>✕</button>
+</div>
+<div style={{marginTop:8}}><span style={{fontWeight:700,fontSize:16}}>{s.name}</span><span style={{color:'rgba(255,255,255,.6)',fontSize:13,marginLeft:8}}>{s.pos}</span></div>
+<div style={{fontSize:14,color:'rgba(255,255,255,.8)'}}>{s.co}{s.dept?' · '+s.dept:''}</div>
+</div>
+<div style={{padding:24}}>
+<div style={{display:'flex',alignItems:'center',gap:6,marginBottom:12}}>
+<span className="badge" style={{background:cat.bg,color:cat.color}}>{cat.icon} {cat.label}</span>
+<span style={{fontSize:11,color:'var(--coral)',fontWeight:600}}>{s.exp}</span>
+{s.v&&<span className="badge b-tl" style={{fontSize:10}}>✅ 인증</span>}
+</div>
+<h3 style={{fontSize:18,fontWeight:800,marginBottom:8}}>{s.kw}</h3>
+<p style={{fontSize:14,color:'var(--text2)',lineHeight:1.7,marginBottom:16}}>{s.desc}</p>
+<div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginBottom:20}}>
+{s.region&&<div style={{padding:'8px 12px',background:'var(--bg2)',borderRadius:8,fontSize:12}}><span style={{color:'var(--text3)'}}>📍</span> {s.region}</div>}
+{s.budget&&<div style={{padding:'8px 12px',background:'var(--bg2)',borderRadius:8,fontSize:12}}><span style={{color:'var(--text3)'}}>💰</span> {s.budget}</div>}
+</div>
+<button className="btn btn-a btn-w btn-lg" onClick={()=>{setModal(null);setTimeout(()=>setModal('connect'),200)}}>⚡ 연결 요청하기</button>
+<p style={{fontSize:11,color:'var(--text3)',textAlign:'center',marginTop:8}}>양쪽 모두 수락 시 연락처가 상호 공개됩니다</p>
+</div></div></div>);
+}
+
+// ═══ Connect Modal ═══
+function ConnModal(){const{selSig:s,setModal,st}=useApp();if(!s)return null;const[sending,setSending]=useState(false);
+return(<div className="mdo" onClick={()=>setModal(null)}>
+<div className="mdc" onClick={e=>e.stopPropagation()} style={{padding:26}}>
+<h3 style={{fontSize:17,fontWeight:800,marginBottom:16}}>⚡ 연결 요청</h3>
+<div style={{background:'var(--amber-l)',borderRadius:'var(--rs)',padding:16,marginBottom:16,textAlign:'center'}}>
+<div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:8,marginBottom:6}}>
+<div style={{padding:'6px 12px',background:'var(--card)',borderRadius:8,fontSize:13,fontWeight:600}}>😎 나현준</div>
+<span style={{color:'var(--amber)',fontWeight:800,fontSize:18}}>⚡</span>
+<div style={{padding:'6px 12px',background:'var(--card)',borderRadius:8,fontSize:13,fontWeight:600}}>{s.av} {s.name}</div>
+</div>
+<div style={{fontSize:12,color:'var(--amber-d)'}}>AI SaaS 솔루션 ↔ {s.kw}</div>
+</div>
+<div style={{marginBottom:16}}><span className="il">연결 메시지</span>
+<textarea className="inp" defaultValue={`안녕하세요, 스타트업허브의 나현준입니다.\n${s.kw} 관련하여 도움이 될 수 있을 것 같아 연결 요청 드립니다.`} rows={3} style={{resize:'none',marginTop:6}}/></div>
+<div style={{display:'flex',gap:8}}>
+<button className="btn btn-o" style={{flex:1}} onClick={()=>setModal(null)}>취소</button>
+<button className="btn btn-a" style={{flex:2}} disabled={sending} onClick={()=>{setSending(true);setTimeout(()=>{setModal(null);st('⚡ 연결 요청이 전송되었습니다!');setSending(false)},600)}}>{sending?'전송 중...':'⚡ 연결 요청'}</button>
+</div></div></div>);
+}
+
+// ═══ My Signals ═══
+function Signals(){
+return(<div style={{paddingTop:16}}>
+<div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:16}}>
+<h2 style={{fontSize:18,fontWeight:800}}>📡 내 신호</h2><button className="btn btn-a btn-sm">+ 새 신호</button>
+</div>
+<p style={{fontSize:13,color:'var(--text2)',marginBottom:16}}>신호가 켜져 있으면 매칭이 시작됩니다.</p>
+{MY_SIG.map((sig,i)=>{const cat=gc(sig.cat);return(
+<div key={sig.id} className="card au" style={{padding:18,marginBottom:10,animationDelay:`${i*60}ms`,borderLeft:`3px solid ${cat.color}`}}>
+<div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:8}}>
+<div><span className="badge" style={{background:cat.bg,color:cat.color,fontSize:10}}>{cat.icon} {cat.label}</span><div style={{fontWeight:700,fontSize:15,marginTop:6}}>{sig.kw}</div></div>
+<div style={{display:'flex',alignItems:'center',gap:4}}><div style={{width:8,height:8,borderRadius:4,background:'var(--teal)'}}/><span style={{fontSize:11,color:'var(--teal)',fontWeight:600}}>활성</span></div>
+</div>
+<p style={{fontSize:13,color:'var(--text2)',lineHeight:1.5,marginBottom:10}}>{sig.desc}</p>
+<div style={{display:'flex',gap:12,fontSize:12,color:'var(--text3)'}}><span>👁️ 조회 {sig.views}회</span><span>⚡ 매칭 {sig.matches}건</span></div>
+</div>)})}
+<div className="card" style={{padding:20,textAlign:'center',border:'2px dashed var(--bg3)',boxShadow:'none',cursor:'pointer'}}>
+<div style={{fontSize:28}}>➕</div><div style={{fontSize:14,fontWeight:600,color:'var(--text2)'}}>새로운 신호 추가</div>
+</div></div>);
+}
+
+// ═══ Matches ═══
+function Matches(){const{matches,connect,setSelSig,setModal}=useApp();const[tab,setTab]=useState('new');
+const fl=tab==='all'?matches:matches.filter(m=>m.st===tab||(tab==='new'&&m.st==='viewed'));
+return(<div style={{paddingTop:16}}>
+<h2 style={{fontSize:18,fontWeight:800,marginBottom:14}}>🎯 받은 매칭</h2>
+<div className="tab" style={{marginBottom:16}}>{[{k:'new',l:'새로운'},{k:'connected',l:'연결됨'},{k:'all',l:'전체'}].map(t=>(
+<div key={t.k} className={`ti ${tab===t.k?'on':''}`} onClick={()=>setTab(t.k)}>{t.l}</div>))}</div>
+{fl.length===0?<div style={{textAlign:'center',padding:40,color:'var(--text3)'}}><div style={{fontSize:40}}>🎯</div><p style={{fontWeight:600,color:'var(--text2)',marginTop:6}}>매칭이 없어요</p></div>:
+fl.map((m,i)=>{const sig=m.sig;const cat=gc(sig.cat);const isNew=m.st==='new';return(
+<div key={m.id} className={`match-card au ${isNew?'hot':''}`} style={{padding:18,marginBottom:10,animationDelay:`${i*60}ms`}}>
+{isNew&&<div style={{display:'flex',alignItems:'center',gap:4,marginBottom:8}}><div style={{width:8,height:8,borderRadius:4,background:'var(--amber)'}}/><span style={{fontSize:11,color:'var(--amber)',fontWeight:700}}>새로운 매칭!</span></div>}
+<div style={{display:'flex',alignItems:'center',gap:12,marginBottom:10}}>
+<div className="score" style={{background:m.st==='connected'?'var(--teal)':'linear-gradient(135deg,var(--amber),var(--coral))'}}>{m.st==='connected'?'✓':sig.score+'%'}</div>
+<div style={{flex:1}}><div style={{fontWeight:700,fontSize:14}}>{sig.name} <span style={{fontSize:11,color:'var(--text3)',fontWeight:400}}>{sig.pos}</span></div><div style={{fontSize:12,color:'var(--text2)'}}>{sig.co}{sig.dept?' · '+sig.dept:''}</div></div>
+<span className="badge" style={{background:cat.bg,color:cat.color,fontSize:10}}>{cat.icon}</span>
+</div>
+<div style={{fontSize:13,fontWeight:600,marginBottom:4}}>{sig.kw}</div>
+<div style={{fontSize:12,color:'var(--text2)',marginBottom:8,lineHeight:1.5}}>{sig.desc}</div>
+<div style={{background:'var(--amber-x)',borderRadius:8,padding:'8px 12px',fontSize:12,marginBottom:10}}>
+<strong style={{color:'var(--amber-d)'}}>매칭 이유:</strong> <span style={{color:'var(--text2)'}}>내 신호 "{m.mySig.kw}"와 일치</span>
+</div>
+{m.st!=='connected'?<div style={{display:'flex',gap:8}}>
+<button className="btn btn-o btn-sm" style={{flex:1}} onClick={()=>{setSelSig(sig);setModal('detail')}}>상세보기</button>
+<button className="btn btn-a btn-sm" style={{flex:2}} onClick={()=>connect(m.id)}>⚡ 연결하기</button>
+</div>:<div style={{padding:'10px 14px',background:'var(--teal-l)',borderRadius:8,fontSize:13,color:'var(--teal-d)',fontWeight:600}}>🤝 연결 완료!</div>}
+</div>)})}
+</div>);
+}
+
+// ═══ Connections ═══
+function Conns(){const{conns}=useApp();const[q,setQ]=useState('');
+const fl=conns.filter(c=>!q||c.name.includes(q)||c.co.includes(q));
+return(<div style={{paddingTop:16}}>
+<h2 style={{fontSize:18,fontWeight:800,marginBottom:14}}>📖 연결된 파트너 <span style={{color:'var(--teal)',fontSize:14}}>{conns.length}명</span></h2>
+<input className="inp" value={q} onChange={e=>setQ(e.target.value)} placeholder="이름, 회사로 검색" style={{marginBottom:14,boxShadow:'var(--sh)'}}/>
+{fl.length===0?<div style={{textAlign:'center',padding:40,color:'var(--text3)'}}><div style={{fontSize:40}}>📖</div><p style={{fontWeight:600,color:'var(--text2)',marginTop:6}}>연결된 파트너가 없어요</p></div>:
+fl.map((c,i)=>(
+<div key={c.id} className="card au" style={{padding:16,marginBottom:8,animationDelay:`${i*50}ms`}}>
+<div style={{display:'flex',alignItems:'center',gap:12}}>
+<div style={{width:44,height:44,borderRadius:22,background:'var(--teal-l)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:22}}>{c.av}</div>
+<div style={{flex:1}}><div style={{fontWeight:700,fontSize:14}}>{c.name} <span style={{fontSize:11,color:'var(--text3)',fontWeight:400}}>{c.pos}</span></div><div style={{fontSize:12,color:'var(--text2)'}}>{c.co} · {c.dept}</div><div style={{fontSize:13,color:'var(--teal)',fontWeight:600,marginTop:2}}>📞 {c.ph}</div></div>
+<a href={`tel:${c.ph}`} className="btn btn-t btn-sm" style={{padding:'5px 10px',fontSize:11}}>전화</a>
+</div>
+<div style={{fontSize:11,color:'var(--amber-d)',marginTop:6,padding:'4px 8px',background:'var(--amber-l)',borderRadius:4}}>⚡ {c.ctx}</div>
+{c.memo&&<div style={{fontSize:11,color:'var(--text2)',marginTop:4}}>📝 {c.memo}</div>}
+</div>))}
+</div>);
+}
+
+// ═══ Profile ═══
+function Profile(){const{user,setPg}=useApp();
+return(<div style={{paddingTop:16}}>
+<div className="card" style={{padding:24,textAlign:'center',marginBottom:14}}>
+<div style={{width:64,height:64,borderRadius:32,background:'var(--amber-l)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:32,margin:'0 auto 10px'}}>{user.av}</div>
+<h2 style={{fontSize:20,fontWeight:800}}>{user.name}</h2>
+<p style={{fontSize:13,color:'var(--text2)'}}>{user.pos} · {user.dept}</p>
+<p style={{fontSize:14,fontWeight:600,color:'var(--amber)'}}>{user.co}</p>
+<span className="badge b-am" style={{marginTop:6}}>{user.plan}</span>
+</div>
+<div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginBottom:14}}>
+{[{l:'활성 신호',v:'2개',c:'var(--amber)'},{l:'총 매칭',v:'47건',c:'var(--teal)'},{l:'연결됨',v:'8명',c:'var(--blue)'},{l:'응답률',v:'92%',c:'var(--violet)'}].map((s,i)=>(
+<div key={i} className="card" style={{padding:14,textAlign:'center'}}><div style={{fontSize:18,fontWeight:800,color:s.c}}>{s.v}</div><div style={{fontSize:11,color:'var(--text3)',marginTop:2}}>{s.l}</div></div>))}
+</div>
+<div className="card" style={{marginBottom:14}}>
+{[{i:'📡',l:'내 신호 관리',a:()=>setPg('signals')},{i:'⚙️',l:'설정',a:()=>setPg('settings')},{i:'💎',l:'구독 관리'}].map((m,i)=>(
+<div key={i} onClick={m.a} style={{padding:'14px 18px',display:'flex',alignItems:'center',gap:10,borderBottom:i<2?'1px solid var(--bg2)':'none',cursor:'pointer'}} onMouseEnter={e=>e.currentTarget.style.background='var(--bg2)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'}>
+<span style={{fontSize:16}}>{m.i}</span><span style={{fontSize:14,fontWeight:500,flex:1}}>{m.l}</span><span style={{color:'var(--text3)'}}>→</span>
+</div>))}
+</div>
+<button className="btn btn-o btn-w" style={{color:'var(--red)'}}>로그아웃</button>
+</div>);
+}
+
+// ═══ Settings ═══
+function Settings(){const{setPg}=useApp();const[st2,setSt]=useState({vis:true,noti:true,match:true,weekly:true});const tg=k=>setSt(p=>({...p,[k]:!p[k]}));
+const T=({on,fn,label})=><div onClick={fn} role="switch" aria-checked={on} aria-label={label} tabIndex={0} style={{width:42,height:22,borderRadius:11,background:on?'var(--amber)':'var(--bg3)',cursor:'pointer',position:'relative',flexShrink:0}}><div style={{width:18,height:18,borderRadius:9,background:'#fff',position:'absolute',top:2,left:on?22:2,transition:'left .2s',boxShadow:'0 1px 2px rgba(0,0,0,.15)'}}/></div>;
+return(<div style={{paddingTop:16}}>
+<button className="btn btn-g btn-sm" onClick={()=>setPg('profile')} style={{marginBottom:14}}>← 뒤로</button>
+<h2 style={{fontSize:18,fontWeight:800,marginBottom:16}}>⚙️ 설정</h2>
+<div className="card" style={{marginBottom:14}}>
+<div style={{padding:'12px 18px',borderBottom:'1px solid var(--bg2)'}}><h3 style={{fontSize:13,fontWeight:700}}>📡 신호 & 매칭</h3></div>
+{[{k:'vis',l:'프로필 검색 노출',d:'다른 사용자가 나를 찾을 수 있음'},{k:'match',l:'자동 매칭 알림',d:'새 매칭 발견 시 알림'}].map(x=>(
+<div key={x.k} style={{padding:'10px 18px',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+<div><div style={{fontSize:13,fontWeight:500}}>{x.l}</div><div style={{fontSize:11,color:'var(--text3)'}}>{x.d}</div></div>
+<T on={st2[x.k]} fn={()=>tg(x.k)} label={x.l}/></div>))}
+</div>
+<div className="card"><div style={{padding:'12px 18px',borderBottom:'1px solid var(--bg2)'}}><h3 style={{fontSize:13,fontWeight:700}}>🔔 알림</h3></div>
+{[{k:'noti',l:'푸시 알림'},{k:'weekly',l:'주간 매칭 리포트'}].map(x=>(
+<div key={x.k} style={{padding:'10px 18px',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+<span style={{fontSize:13}}>{x.l}</span><T on={st2[x.k]} fn={()=>tg(x.k)} label={x.l}/></div>))}
+</div></div>);
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

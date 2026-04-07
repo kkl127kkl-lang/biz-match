@@ -225,7 +225,7 @@ return(<div style={{background:'var(--bg)'}}>
 </p>
 <div className="au" style={{animationDelay:'.4s',display:'flex',gap:12,flexWrap:'wrap',marginBottom:16}}>
 <button className="btn btn-a btn-xl" onClick={()=>setPg('signup')}>매칭 시작하기 →</button>
-<button className="btn btn-o btn-lg" onClick={()=>document.getElementById('who')?.scrollIntoView({behavior:'smooth'})}>누가 사용하나요?</button>
+<button className="btn btn-o btn-lg" onClick={()=>setPg('signup')}>무료로 둘러보기</button>
 </div>
 <div className="au" style={{animationDelay:'.5s',display:'flex',alignItems:'center',gap:12,fontSize:13,color:'var(--text3)'}}>
 <div style={{display:'flex'}}>{['🛒','📊','☕','👥','🚀'].map((a,i)=><div key={i} style={{width:28,height:28,borderRadius:14,background:['var(--blue-l)','var(--violet-l)','var(--amber-l)','var(--teal-l)','var(--coral-l)'][i],display:'flex',alignItems:'center',justifyContent:'center',fontSize:14,marginLeft:i?-8:0,border:'2px solid var(--bg)',zIndex:5-i}}>{a}</div>)}</div>
@@ -372,111 +372,40 @@ return(<div style={{minHeight:'100vh',display:'flex',alignItems:'center',justify
 </div></div>);
 }
 
-// ═══ Signup (5단계: 인증→프로필→니즈→제공→완료) ═══
-function Signup(){const{setPg,login}=useApp();const[s,setS]=useState(1);const[cats,setCats]=useState([]);const[vType,setVType]=useState('');const[urgent,setUrgent]=useState('');
-const tg=k=>setCats(p=>p.includes(k)?p.filter(x=>x!==k):[...p,k]);
-const steps=['신원 인증','프로필','찾고 있는 것','제공할 수 있는 것','완료'];
+// ═══ Signup (초간단 2단계: 소셜로그인 → 기본정보) ═══
+function Signup(){const{setPg,login}=useApp();const[s,setS]=useState(1);
 return(<div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',padding:20}}>
-<div className="asi" style={{maxWidth:460,width:'100%'}}>
-<div style={{textAlign:'center',marginBottom:20}}><div style={{fontSize:36,cursor:'pointer'}} onClick={()=>setPg('landing')}>⚡</div><h1 style={{fontSize:22,fontWeight:800,marginTop:4}}>매칭 시작하기</h1>
-<div style={{display:'flex',gap:3,justifyContent:'center',marginTop:10}}>{[1,2,3,4,5].map(x=><div key={x} style={{width:x===s?36:16,height:4,borderRadius:2,background:x<=s?'var(--amber)':'var(--bg3)',transition:'all .3s'}}/>)}</div>
-<div style={{fontSize:11,color:'var(--text3)',marginTop:6}}>{steps[s-1]}</div>
+<div className="asi" style={{maxWidth:420,width:'100%'}}>
+<div style={{textAlign:'center',marginBottom:24}}><div style={{fontSize:36,cursor:'pointer'}} onClick={()=>setPg('landing')}>⚡</div><h1 style={{fontSize:22,fontWeight:800,marginTop:4}}>{s===1?'30초 만에 시작하기':'거의 다 됐어요!'}</h1>
+<div style={{display:'flex',gap:4,justifyContent:'center',marginTop:10}}>{[1,2].map(x=><div key={x} style={{width:x===s?48:24,height:4,borderRadius:2,background:x<=s?'var(--amber)':'var(--bg3)',transition:'all .3s'}}/>)}</div>
 </div>
 <div className="card" style={{padding:26}}>
 
-{/* Step 1: 신원 인증 */}
+{/* Step 1: 소셜 로그인 */}
 {s===1&&<div className="asr">
-<div style={{textAlign:'center',marginBottom:16}}><div style={{fontSize:32}}>🔐</div><p style={{fontWeight:700,fontSize:15,marginTop:6}}>먼저 본인 인증이 필요해요</p><p style={{fontSize:12,color:'var(--text2)',marginTop:4}}>신뢰할 수 있는 매칭을 위해 간단한 인증을 진행합니다</p></div>
-<div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:16}}>
-{[{k:'email',icon:'📧',t:'회사 이메일 인증',d:'@samsung.com 등 회사 도메인 이메일',rec:true},{k:'biz',icon:'📋',t:'사업자등록증 인증',d:'자영업자·소상공인·대표님'},{k:'card',icon:'📇',t:'명함 촬영 인증',d:'명함 사진을 AI가 자동 인식'},{k:'linkedin',icon:'🔗',t:'LinkedIn 연동',d:'프로필을 자동으로 가져옵니다'}].map(v=>(
-<div key={v.k} onClick={()=>setVType(v.k)} style={{display:'flex',alignItems:'center',gap:12,padding:14,borderRadius:'var(--rs)',border:`1.5px solid ${vType===v.k?'var(--amber)':'var(--bg3)'}`,background:vType===v.k?'var(--amber-l)':'var(--card)',cursor:'pointer',transition:'all .15s'}}>
-<span style={{fontSize:24}}>{v.icon}</span>
-<div style={{flex:1}}><div style={{fontWeight:600,fontSize:14}}>{v.t} {v.rec&&<span style={{fontSize:10,color:'var(--teal)',fontWeight:700}}>추천</span>}</div><div style={{fontSize:11,color:'var(--text3)'}}>{v.d}</div></div>
-{vType===v.k&&<span style={{color:'var(--amber)',fontSize:18}}>✓</span>}
-</div>))}
-</div>
-{vType==='email'&&<div style={{marginBottom:14}}><span className="il">회사 이메일</span><div style={{display:'flex',gap:8}}><input className="inp" placeholder="hong@company.com" style={{flex:1}}/><button className="btn btn-a btn-sm">인증</button></div></div>}
-{vType==='biz'&&<div style={{marginBottom:14}}><span className="il">사업자등록번호</span><div style={{display:'flex',gap:8}}><input className="inp" placeholder="000-00-00000" style={{flex:1}}/><button className="btn btn-a btn-sm">조회</button></div></div>}
-{vType==='card'&&<div style={{marginBottom:14,textAlign:'center',padding:24,border:'2px dashed var(--bg3)',borderRadius:'var(--r)',cursor:'pointer'}}><div style={{fontSize:28}}>📷</div><p style={{fontSize:13,color:'var(--text2)',marginTop:4}}>명함 사진을 촬영하거나 업로드하세요</p><p style={{fontSize:11,color:'var(--text3)'}}>AI가 자동으로 정보를 인식합니다</p></div>}
-{vType==='linkedin'&&<div style={{marginBottom:14}}><button className="btn btn-o btn-w" style={{background:'#0A66C2',color:'#fff',border:'none'}}>🔗 LinkedIn으로 연동하기</button></div>}
-<div style={{display:'flex',gap:8,marginTop:4}}>
-<button className="btn btn-o" style={{flex:1}} onClick={()=>setPg('landing')}>←</button>
-<button className="btn btn-a" style={{flex:2}} onClick={()=>setS(2)} disabled={!vType}>다음 →</button>
-</div>
-<p style={{fontSize:11,color:'var(--text3)',textAlign:'center',marginTop:10}}>🔒 인증 정보는 매칭 외 목적으로 사용되지 않습니다</p>
+<button className="btn btn-o btn-w" onClick={()=>setS(2)} style={{background:'#FEE500',border:'none',color:'#000',marginBottom:8,fontWeight:700}}>💬 카카오로 시작</button>
+<button className="btn btn-o btn-w" onClick={()=>setS(2)} style={{marginBottom:8}}>🔵 Google로 시작</button>
+<button className="btn btn-o btn-w" onClick={()=>setS(2)} style={{marginBottom:8,background:'#0A66C2',color:'#fff',border:'none'}}>🔗 LinkedIn으로 시작</button>
+<div style={{margin:'12px 0',textAlign:'center',fontSize:11,color:'var(--text3)'}}>또는</div>
+<div style={{marginBottom:10}}><input className="inp" placeholder="이메일"/></div>
+<div style={{marginBottom:14}}><input className="inp" type="password" placeholder="비밀번호 (8자 이상)"/></div>
+<button className="btn btn-a btn-w" onClick={()=>setS(2)}>이메일로 시작 →</button>
+<p style={{fontSize:11,color:'var(--text3)',textAlign:'center',marginTop:12}}>가입 시 <span style={{textDecoration:'underline'}}>이용약관</span>에 동의합니다</p>
 </div>}
 
-{/* Step 2: 프로필 */}
+{/* Step 2: 기본 정보 (최소한만) */}
 {s===2&&<div className="asr">
-<div style={{textAlign:'center',marginBottom:16}}><div style={{fontSize:32}}>👤</div><p style={{fontWeight:700,fontSize:15,marginTop:6}}>비즈니스 프로필</p></div>
-<div style={{marginBottom:10}}><span className="il">이름 (실명) *</span><input className="inp" placeholder="홍길동"/></div>
-<div style={{marginBottom:10}}><span className="il">회사명 (가게명/브랜드명) *</span><input className="inp" placeholder="예: 강남 로우커피, 삼성전자"/></div>
-<div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginBottom:10}}>
-<div><span className="il">부서</span><input className="inp" placeholder="없으면 비워두세요"/></div>
-<div><span className="il">직책 *</span><input className="inp" placeholder="대표, 과장, 팀장"/></div>
-</div>
-<div style={{marginBottom:10}}><span className="il">업종 *</span><input className="inp" placeholder="카페, 반도체, 투자, IT서비스 등"/></div>
-<div style={{marginBottom:10}}><span className="il">전화번호 *</span><div style={{display:'flex',gap:8}}><input className="inp" placeholder="010-0000-0000" style={{flex:1}}/><button className="btn btn-o btn-sm">인증</button></div></div>
-<div style={{marginBottom:18}}><span className="il">한줄 소개 (선택)</span><input className="inp" placeholder="예: 반도체 소재 구매 10년차, 카페 3개 운영 중"/></div>
-<div style={{display:'flex',gap:8}}><button className="btn btn-o" style={{flex:1}} onClick={()=>setS(1)}>←</button><button className="btn btn-a" style={{flex:2}} onClick={()=>setS(3)}>다음 →</button></div>
+<p style={{fontSize:13,color:'var(--text2)',textAlign:'center',marginBottom:16}}>딱 3가지만 알려주세요. 나머지는 나중에!</p>
+<div style={{marginBottom:10}}><span className="il">이름 *</span><input className="inp" placeholder="홍길동"/></div>
+<div style={{marginBottom:10}}><span className="il">회사명 (가게명, 브랜드명) *</span><input className="inp" placeholder="예: 강남 로우커피, 삼성전자, 프리랜서"/></div>
+<div style={{marginBottom:18}}><span className="il">직책 *</span><input className="inp" placeholder="예: 대표, 구매팀 과장, 개발자"/></div>
+<button className="btn btn-a btn-w btn-lg" onClick={login}>⚡ 둘러보기 시작!</button>
+<p style={{fontSize:11,color:'var(--text3)',textAlign:'center',marginTop:10}}>🔒 상세 프로필은 앱 안에서 편하게 채울 수 있어요</p>
 </div>}
 
-{/* Step 3: 찾고 있는 것 (니즈 카드) */}
-{s===3&&<div className="asr">
-<div style={{textAlign:'center',marginBottom:16}}><div style={{fontSize:32}}>🔍</div><p style={{fontWeight:700,fontSize:15,marginTop:6}}>지금 무엇을 찾고 있나요?</p><p style={{fontSize:12,color:'var(--text2)',marginTop:4}}>이 정보로 딱 맞는 상대를 매칭해드립니다</p></div>
-<p style={{fontSize:13,fontWeight:600,marginBottom:8}}>카테고리 (복수 선택)</p>
-<div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginBottom:14}}>
-{CATS.map(c=>{const on=cats.includes(c.key);return(
-<button key={c.key} onClick={()=>tg(c.key)} style={{display:'flex',alignItems:'center',gap:6,padding:'10px 14px',borderRadius:'var(--rs)',border:`1.5px solid ${on?c.color:'var(--bg3)'}`,background:on?c.bg:'var(--card)',color:on?c.color:'var(--text2)',fontSize:13,fontWeight:600,textAlign:'left',cursor:'pointer',transition:'all .15s'}}>
-<span style={{fontSize:16}}>{c.icon}</span>{c.label}
-</button>)})}
 </div>
-<div style={{marginBottom:10}}><span className="il">구체적으로 무엇을 찾나요? *</span><textarea className="inp" placeholder="예: 에티오피아 원두 월 30kg 납품 가능한 로스터리&#10;예: 시리즈A 50억 투자유치, AI 영상분석 SaaS&#10;예: 시니어 백엔드 개발자 (3년+, 연봉 1억 이상)" rows={3} style={{resize:'none',fontSize:13}}/></div>
-<div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginBottom:10}}>
-<div><span className="il">희망 지역</span><input className="inp" placeholder="서울, 전국 등" style={{fontSize:13}}/></div>
-<div><span className="il">예산/규모</span><input className="inp" placeholder="월 200만원, 연 50억" style={{fontSize:13}}/></div>
-</div>
-<div style={{marginBottom:18}}><span className="il">긴급도</span>
-<div style={{display:'flex',gap:8}}>{[{k:'urgent',l:'🔴 급함 (1개월 내)',c:'var(--coral)'},{k:'normal',l:'🟡 여유 (3개월)',c:'var(--amber)'},{k:'explore',l:'🟢 탐색 중',c:'var(--teal)'}].map(u=>(
-<button key={u.k} onClick={()=>setUrgent(u.k)} style={{flex:1,padding:'8px 6px',borderRadius:'var(--rs)',border:`1.5px solid ${urgent===u.k?u.c:'var(--bg3)'}`,background:urgent===u.k?u.c+'15':'var(--card)',fontSize:11,fontWeight:600,color:urgent===u.k?u.c:'var(--text3)',cursor:'pointer',transition:'all .15s'}}>{u.l}</button>))}</div>
-</div>
-<div style={{display:'flex',gap:8}}><button className="btn btn-o" style={{flex:1}} onClick={()=>setS(2)}>←</button><button className="btn btn-a" style={{flex:2}} onClick={()=>setS(4)} disabled={!cats.length}>다음 →</button></div>
-</div>}
-
-{/* Step 4: 제공할 수 있는 것 (선택) */}
-{s===4&&<div className="asr">
-<div style={{textAlign:'center',marginBottom:16}}><div style={{fontSize:32}}>💡</div><p style={{fontWeight:700,fontSize:15,marginTop:6}}>제공할 수 있는 것이 있나요?</p><p style={{fontSize:12,color:'var(--text2)',marginTop:4}}>입력하면 상대방도 나를 더 잘 찾을 수 있어요 (선택)</p></div>
-<div style={{marginBottom:10}}><span className="il">내가 제공할 수 있는 것</span><textarea className="inp" placeholder="예: 스페셜티 원두 납품 (월 100kg까지)&#10;예: 반도체 세정제 납품 가능 (월 5톤+)&#10;예: AI/SaaS 분야 시리즈A~B 투자 검토 가능&#10;예: 시니어 개발자 채용 헤드헌팅" rows={3} style={{resize:'none',fontSize:13}}/></div>
-<div style={{marginBottom:10}}><span className="il">주요 강점/경력 키워드 (선택)</span><input className="inp" placeholder="예: 구매10년차, VC투자심사, 바리스타자격, 해외영업" style={{fontSize:13}}/></div>
-<div style={{background:'var(--teal-l)',borderRadius:'var(--rs)',padding:14,marginBottom:18}}>
-<div style={{fontSize:12,color:'var(--teal-d)',fontWeight:600}}>💡 이 정보가 있으면</div>
-<div style={{fontSize:13,color:'var(--teal-d)',marginTop:4,lineHeight:1.5}}>• 추천 탭에서 "이 사람이 당신이 찾는 걸 제공합니다"로 노출<br/>• 검색 시 키워드 매칭으로 더 잘 검색됨<br/>• 매칭 정확도가 올라갑니다</div>
-</div>
-<div style={{display:'flex',gap:8}}>
-<button className="btn btn-o" style={{flex:1}} onClick={()=>setS(3)}>←</button>
-<button className="btn btn-g" style={{flex:1}} onClick={()=>setS(5)}>건너뛰기</button>
-<button className="btn btn-a" style={{flex:1}} onClick={()=>setS(5)}>다음 →</button>
-</div>
-</div>}
-
-{/* Step 5: 완료 */}
-{s===5&&<div className="asr" style={{textAlign:'center'}}>
-<div style={{fontSize:48,marginBottom:12}}>🎉</div>
-<h2 style={{fontSize:20,fontWeight:800,marginBottom:8}}>프로필 등록 완료!</h2>
-<p style={{fontSize:14,color:'var(--text2)',lineHeight:1.6,marginBottom:8}}>AI가 당신에게 맞는 매칭을 찾기 시작합니다</p>
-<div style={{background:'var(--bg2)',borderRadius:'var(--rs)',padding:16,marginBottom:16,textAlign:'left'}}>
-<div style={{fontSize:13,fontWeight:600,marginBottom:8}}>✅ 등록된 정보</div>
-{[{i:'🔐',t:'신원 인증 완료'},{i:'👤',t:'비즈니스 프로필 등록'},{i:'🔍',t:'찾고 있는 것 등록'},{i:'💡',t:'제공할 수 있는 것 등록'}].map((x,i)=>(
-<div key={i} style={{display:'flex',alignItems:'center',gap:8,padding:'4px 0',fontSize:13,color:'var(--teal)'}}><span>{x.i}</span>{x.t}</div>))}
-</div>
-<div style={{background:'var(--amber-l)',borderRadius:'var(--rs)',padding:14,marginBottom:20}}>
-<div style={{fontSize:13,fontWeight:600,color:'var(--amber-d)'}}>🛡️ 당신의 연락처는 안전합니다</div>
-<div style={{fontSize:12,color:'var(--amber-d)',marginTop:4}}>양쪽 모두 동의해야만 연락처가 공개됩니다.<br/>일방적 접근은 불가능합니다.</div>
-</div>
-<button className="btn btn-a btn-w btn-lg" onClick={login}>⚡ 매칭 시작하기!</button>
-</div>}
-
-</div></div></div>);
+<p style={{textAlign:'center',marginTop:14,fontSize:13}}>이미 계정이 있나요? <span style={{color:'var(--amber)',fontWeight:600,cursor:'pointer'}} onClick={()=>setPg('login')}>로그인</span></p>
+</div></div>);
 }
 
 // ═══ Shell ═══
@@ -512,6 +441,20 @@ return(<div style={{paddingTop:16}}>
 <div style={{display:'flex',gap:8,marginTop:8}}>
 <button className="btn btn-sm" style={{flex:1,background:'rgba(255,255,255,.15)',color:'#fff'}} onClick={()=>setPg('search')}>🔍 담당자 찾기</button>
 <button className="btn btn-sm" style={{flex:1,background:'rgba(255,255,255,.15)',color:'#fff'}} onClick={()=>setPg('chat')}>💬 채팅 {chatUn>0&&<span style={{background:'var(--coral)',borderRadius:8,padding:'1px 6px',fontSize:10,marginLeft:4}}>{chatUn}</span>}</button>
+</div>
+</div>
+
+{/* 프로필 완성 유도 배너 */}
+<div className="card" style={{padding:16,marginBottom:14,border:'1.5px solid var(--amber)',background:'var(--amber-x)'}}>
+<div style={{display:'flex',alignItems:'center',gap:12}}>
+<div style={{width:40,height:40,borderRadius:20,background:'var(--amber-l)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:18,flexShrink:0}}>📋</div>
+<div style={{flex:1}}>
+<div style={{fontWeight:700,fontSize:13,color:'var(--amber-d)'}}>프로필을 완성하면 매칭률 3배↑</div>
+<div style={{fontSize:11,color:'var(--text2)',marginTop:2}}>"찾고 있는 것"을 등록하면 AI가 자동 매칭!</div>
+<div style={{height:4,background:'var(--bg3)',borderRadius:2,marginTop:6}}><div style={{height:4,background:'linear-gradient(90deg,var(--amber),var(--teal))',borderRadius:2,width:'30%'}}/></div>
+<div style={{fontSize:10,color:'var(--text3)',marginTop:2}}>완성도 30% — 니즈카드 · 인증 · 전화번호 추가</div>
+</div>
+<button className="btn btn-a btn-sm" style={{flexShrink:0,fontSize:11}} onClick={()=>setPg('signals')}>완성</button>
 </div>
 </div>
 
@@ -590,7 +533,7 @@ return(<div className="mdo" onClick={()=>setModal(null)}>
 }
 
 // ═══ Connect Modal ═══
-function ConnModal(){const{selSig:s,setModal,st}=useApp();if(!s)return null;const[sending,setSending]=useState(false);
+function ConnModal(){const{selSig:s,setModal,st}=useApp();if(!s)return null;const[sending,setSending]=useState(false);const[myNeed,setMyNeed]=useState('');
 return(<div className="mdo" onClick={()=>setModal(null)}>
 <div className="mdc" onClick={e=>e.stopPropagation()} style={{padding:26}}>
 <h3 style={{fontSize:17,fontWeight:800,marginBottom:16}}>⚡ 연결 요청</h3>
@@ -600,10 +543,16 @@ return(<div className="mdo" onClick={()=>setModal(null)}>
 <span style={{color:'var(--amber)',fontWeight:800,fontSize:18}}>⚡</span>
 <div style={{padding:'6px 12px',background:'var(--card)',borderRadius:8,fontSize:13,fontWeight:600}}>{s.av} {s.name}</div>
 </div>
-<div style={{fontSize:12,color:'var(--amber-d)'}}>AI SaaS 솔루션 ↔ {s.kw}</div>
+<div style={{fontSize:12,color:'var(--amber-d)'}}>{s.kw}</div>
+</div>
+{/* 니즈 간편 입력 (가입 시 안 받았으므로 여기서) */}
+<div style={{background:'var(--bg2)',borderRadius:'var(--rs)',padding:14,marginBottom:14}}>
+<span className="il" style={{fontSize:12}}>💡 내가 찾고 있는 것 (상대에게 보여집니다)</span>
+<input className="inp" value={myNeed} onChange={e=>setMyNeed(e.target.value)} placeholder="예: AI 영업자동화 솔루션을 제공합니다" style={{marginTop:6,fontSize:13}}/>
+<p style={{fontSize:10,color:'var(--text3)',marginTop:4}}>이 정보가 있으면 상대가 수락할 확률이 높아져요!</p>
 </div>
 <div style={{marginBottom:16}}><span className="il">연결 메시지</span>
-<textarea className="inp" defaultValue={`안녕하세요, 스타트업허브의 나현준입니다.\n${s.kw} 관련하여 도움이 될 수 있을 것 같아 연결 요청 드립니다.`} rows={3} style={{resize:'none',marginTop:6}}/></div>
+<textarea className="inp" defaultValue={`안녕하세요, 스타트업허브의 나현준입니다.\n${s.kw} 관련하여 협력을 제안드립니다.`} rows={3} style={{resize:'none',marginTop:6,fontSize:13}}/></div>
 <div style={{display:'flex',gap:8}}>
 <button className="btn btn-o" style={{flex:1}} onClick={()=>setModal(null)}>취소</button>
 <button className="btn btn-a" style={{flex:2}} disabled={sending} onClick={()=>{setSending(true);setTimeout(()=>{setModal(null);st('⚡ 연결 요청이 전송되었습니다!');setSending(false)},600)}}>{sending?'전송 중...':'⚡ 연결 요청'}</button>

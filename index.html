@@ -68,6 +68,7 @@ const CATS=[
 {key:'talent',label:'인재 채용',icon:'👥',color:'var(--navy)',bg:'var(--bg2)',pair:'job'},
 {key:'export',label:'수출 파트너',icon:'🌏',color:'var(--teal)',bg:'var(--teal-l)',pair:'import'},
 {key:'import',label:'수입/바이어',icon:'📦',color:'var(--blue)',bg:'var(--blue-l)',pair:'export'},
+{key:'job',label:'이직/기회',icon:'💼',color:'var(--violet)',bg:'var(--violet-l)',pair:'talent'},
 ];
 const gc=k=>CATS.find(c=>c.key===k)||CATS[0];
 
@@ -87,6 +88,17 @@ const SIGNALS=[
 {id:'s10',name:'박수진',av:'👩‍💻',co:'네이버',dept:'AI Lab',pos:'팀장',cat:'partner',kw:'AI 학습 데이터 파트너',desc:'한국어 특화 데이터셋 구축 협력 기업을 찾습니다.',exp:'D-20',v:true,score:86,region:'서울'},
 {id:'s11',name:'강태호',av:'✈️',co:'아모레퍼시픽',dept:'해외사업팀',pos:'부장',cat:'export',kw:'동남아 유통 파트너',desc:'베트남·태국 현지 유통망을 갖춘 무역 파트너사를 찾습니다.',exp:'D-18',v:true,score:82,region:'전국'},
 {id:'s12',name:'한서연',av:'💊',co:'스타셀',dept:'',pos:'CEO',cat:'invest',kw:'2차전지 소재 투자유치',desc:'NCM 양극재 전문 스타트업. 양산 설비 투자를 위한 시리즈A 50억.',exp:'D-14',v:true,score:91,region:'서울'},
+// 투자/금융
+{id:'s13',name:'오승민',av:'📊',co:'한국투자파트너스',dept:'투자심사팀',pos:'심사역',cat:'investor',kw:'2차전지 소재 스타트업 딜소싱',desc:'시리즈A~B 단계. 양산 가능한 기술 보유 기업을 탐색 중.',exp:'D-20',v:true,score:93,region:'전국'},
+{id:'s14',name:'김태현',av:'🏦',co:'IMM PE',dept:'투자팀',pos:'VP',cat:'investor',kw:'SaaS/플랫폼 기업 M&A',desc:'ARR 50억+ SaaS 기업 인수 대상을 찾고 있습니다.',exp:'D-25',v:true,score:87,region:'전국',budget:'1,000억+'},
+{id:'s15',name:'이서영',av:'💰',co:'AI솔루션스',dept:'경영지원',pos:'CFO',cat:'invest',kw:'시리즈B 100억 투자유치',desc:'AI 영상분석 SaaS. ARR 30억, YoY 200% 성장. 글로벌 확장 자금.',exp:'D-18',v:true,score:90,region:'서울'},
+// 구매/조달
+{id:'s16',name:'박지훈',av:'🛒',co:'쿠팡',dept:'상품기획팀',pos:'MD',cat:'supply',kw:'PB 식품 제조사',desc:'쿠팡 자체브랜드 간편식 제조 파트너. 위생 인증 보유 업체.',exp:'D-12',v:true,score:89,region:'전국',budget:'월 3억'},
+{id:'s17',name:'정수아',av:'🏢',co:'LG전자',dept:'Global 구매팀',pos:'선임',cat:'supply',kw:'디스플레이 부품 공급업체',desc:'OLED 패널 관련 부품/소재 신규 공급처 발굴 중.',exp:'D-20',v:true,score:86,region:'전국'},
+// 채용/인재
+{id:'s18',name:'윤하린',av:'👥',co:'네오위즈',dept:'HR',pos:'채용팀장',cat:'talent',kw:'시니어 서버 개발자',desc:'대규모 트래픽 처리 경험 3년+. 연봉 1억 이상 가능.',exp:'D-15',v:true,score:84,region:'서울'},
+{id:'s19',name:'김민재',av:'💼',co:'',dept:'',pos:'백엔드 개발자 (8년차)',cat:'job',kw:'AI/데이터 스타트업 이직',desc:'현 대기업 재직. AI 분야 성장 가능한 스타트업 기회를 찾습니다.',exp:'D-30',v:true,score:82,region:'서울'},
+{id:'s20',name:'이정은',av:'🎯',co:'피플앤잡',dept:'',pos:'헤드헌터',cat:'talent',kw:'핀테크 CTO급 인재',desc:'토스, 카카오뱅크 출신 CTO급 인재를 찾고 있습니다. 스톡옵션 가능.',exp:'D-10',v:true,score:88,region:'서울'},
 ];
 
 const MY_SIG=[
@@ -119,6 +131,20 @@ const DIRECTORY=[
 {co:'제주드림로스터리',dept:'',people:[{name:'윤미정',pos:'대표',sig:'카페 납품처 확대 중 (서울/경기)'}]},
 {co:'동대문 JS봉제',dept:'',people:[{name:'정수빈',pos:'공장장',sig:'의류 위탁생산 주문 받습니다'}]},
 {co:'한빛인테리어',dept:'',people:[{name:'한지영',pos:'실장',sig:'타일/몰딩 자재 도매처 찾는 중'}]},
+// 투자/금융
+{co:'한국투자파트너스',dept:'투자심사팀',people:[{name:'오승민',pos:'심사역',sig:'2차전지 소재 시리즈A~B 딜소싱 중'},{name:'정하나',pos:'수석심사역',sig:'AI/SaaS 시리즈B 딜소싱'}]},
+{co:'IMM PE',dept:'투자팀',people:[{name:'김태현',pos:'VP',sig:'SaaS/플랫폼 기업 M&A 대상 발굴'},{name:'박현우',pos:'Associate',sig:'헬스케어 분야 바이아웃 딜'}]},
+{co:'소프트뱅크벤처스',dept:'투자팀',people:[{name:'이진우',pos:'심사역',sig:'AI 인프라 시드~시리즈A'},{name:'김수현',pos:'수석',sig:'커머스/물류 시리즈B+'}]},
+{co:'KB인베스트먼트',dept:'',people:[{name:'최성호',pos:'팀장',sig:'바이오/의료기기 투자처 발굴'}]},
+// 대기업 구매/조달
+{co:'쿠팡',dept:'상품기획팀',people:[{name:'박지훈',pos:'MD',sig:'PB 간편식 제조 파트너 찾는 중'},{name:'이미나',pos:'바이어',sig:'친환경 포장재 공급업체 물색'}]},
+{co:'LG전자',dept:'Global 구매팀',people:[{name:'정수아',pos:'선임',sig:'OLED 부품/소재 신규 공급처'},{name:'한동현',pos:'과장',sig:'가전 모터/컴프레서 부품사'}]},
+{co:'SK하이닉스',dept:'구매팀',people:[{name:'우성진',pos:'팀장',sig:'반도체 후공정 소재 납품사 선정'},{name:'김정미',pos:'대리',sig:'클린룸 소모품 공급업체'}]},
+// HR/채용
+{co:'네오위즈',dept:'HR',people:[{name:'윤하린',pos:'채용팀장',sig:'시니어 서버 개발자 (연봉 1억+)'}]},
+{co:'카카오',dept:'People팀',people:[{name:'박서연',pos:'리크루터',sig:'AI 리서처/ML엔지니어 영입 중'},{name:'이준서',pos:'HRBP',sig:'프로덕트 디자이너 채용'}]},
+{co:'피플앤잡',dept:'',people:[{name:'이정은',pos:'헤드헌터',sig:'핀테크 CTO급 인재 서치'}]},
+{co:'로버트월터스코리아',dept:'',people:[{name:'제임스 김',pos:'시니어 컨설턴트',sig:'외국계 마케팅 디렉터 포지션'}]},
 ];
 
 function App(){
@@ -155,9 +181,23 @@ return(<Ctx.Provider value={ctx}>
 
 // ═══ Landing ═══
 function Landing(){
-const{setPg}=useApp();const[sy,setSy]=useState(0);const[n,setN]=useState(6847);
+const{setPg}=useApp();const[sy,setSy]=useState(0);const[n,setN]=useState(6847);const[hi,setHi]=useState(0);
+const hooks=[
+  {who:'구매담당자',icon:'🛒',want:'새 공급업체를',color:'var(--blue)'},
+  {who:'투자자',icon:'📊',want:'투자할 스타트업을',color:'var(--violet)'},
+  {who:'카페 사장님',icon:'☕',want:'원두 납품업체를',color:'var(--amber)'},
+  {who:'스타트업 CEO',icon:'🚀',want:'투자자를',color:'var(--coral)'},
+  {who:'채용담당자',icon:'👥',want:'시니어 개발자를',color:'var(--teal)'},
+  {who:'쇼핑몰 대표',icon:'🛍️',want:'위탁생산 공장을',color:'var(--amber)'},
+  {who:'영업팀',icon:'📞',want:'구매담당자 연락처를',color:'var(--blue)'},
+  {who:'식당 사장님',icon:'🍽️',want:'더 좋은 식자재 업체를',color:'var(--teal)'},
+  {who:'헤드헌터',icon:'🎯',want:'핵심 인재를',color:'var(--violet)'},
+  {who:'무역상',icon:'🌏',want:'수출할 제조사를',color:'var(--coral)'},
+];
 useEffect(()=>{const h=()=>setSy(window.scrollY);window.addEventListener('scroll',h,{passive:true});return()=>window.removeEventListener('scroll',h)},[]);
 useEffect(()=>{const t=setInterval(()=>setN(p=>p+Math.floor(Math.random()*3)),7000);return()=>clearInterval(t)},[]);
+useEffect(()=>{const t=setInterval(()=>setHi(p=>(p+1)%hooks.length),2800);return()=>clearInterval(t)},[]);
+const h=hooks[hi];
 return(<div style={{background:'var(--bg)'}}>
 <nav style={{position:'fixed',top:0,left:0,right:0,zIndex:100,background:sy>50?'rgba(250,250,247,.9)':'transparent',backdropFilter:sy>50?'blur(24px)':'none',borderBottom:sy>50?'1px solid var(--bg3)':'none',transition:'all .3s'}}>
 <div className="ctn" style={{display:'flex',alignItems:'center',justifyContent:'space-between',height:60}}>
@@ -168,40 +208,48 @@ return(<div style={{background:'var(--bg)'}}>
 <header style={{paddingTop:120,paddingBottom:80,position:'relative'}}>
 <div style={{position:'absolute',inset:0,background:'radial-gradient(ellipse at 20% 30%,rgba(232,163,23,.06) 0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(13,148,136,.05) 0%,transparent 50%)',pointerEvents:'none'}}/>
 <div className="ctn" style={{position:'relative'}}>
-<div style={{maxWidth:640}}>
+<div style={{maxWidth:680}}>
 <div className="au" style={{animationDelay:'.1s'}}><span className="badge b-am" style={{fontSize:13,padding:'6px 16px',marginBottom:20}}>⚡ 양방향 비즈니스 매칭 플랫폼</span></div>
-<h1 className="au" style={{animationDelay:'.2s',fontSize:'clamp(32px,5.5vw,54px)',fontWeight:800,lineHeight:1.12,letterSpacing:'-2px',marginBottom:20}}>서로 찾는 비즈니스가<br/><span style={{background:'linear-gradient(135deg,var(--amber),var(--coral))',backgroundSize:'200% 200%',animation:'gd 4s ease infinite',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}>여기서 만납니다</span></h1>
-<p className="au" style={{animationDelay:'.3s',fontSize:'clamp(16px,2.5vw,20px)',color:'var(--text2)',lineHeight:1.7,marginBottom:32}}>
-카페 사장님은 원두 로스터리를 찾고, 로스터리는 카페를 찾습니다.<br/>
-쇼핑몰 대표는 봉제공장을 찾고, 공장은 발주처를 찾습니다.<br/>
-구매담당자는 공급업체를 찾고, 공급업체는 구매담당자를 찾습니다.<br/>
-<strong style={{color:'var(--text)'}}>1인 사장님부터 대기업까지, 서로 찾고 있는데 아직 만나지 못했을 뿐.</strong>
+<h1 className="au" style={{animationDelay:'.2s',fontSize:'clamp(28px,5vw,48px)',fontWeight:800,lineHeight:1.15,letterSpacing:'-1.5px',marginBottom:8}}>
+지금 이 순간<br/>
+<span key={hi} className="au" style={{display:'inline-flex',alignItems:'center',gap:8,color:h.color}}>
+<span>{h.icon}</span> {h.who}
+</span>가<br/>
+<span key={hi+'w'} className="au" style={{background:'linear-gradient(135deg,var(--amber),var(--coral))',backgroundSize:'200% 200%',animation:'gd 4s ease infinite',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}>{h.want} 찾고 있습니다</span>
+</h1>
+<p className="au" style={{animationDelay:'.3s',fontSize:'clamp(15px,2.2vw,18px)',color:'var(--text2)',lineHeight:1.7,marginBottom:28,marginTop:16}}>
+서로 찾고 있는데, 아직 만나지 못했을 뿐.<br/>
+<strong style={{color:'var(--text)'}}>BizMatch가 양쪽을 연결합니다.</strong>
 </p>
 <div className="au" style={{animationDelay:'.4s',display:'flex',gap:12,flexWrap:'wrap',marginBottom:16}}>
 <button className="btn btn-a btn-xl" onClick={()=>setPg('signup')}>매칭 시작하기 →</button>
-<button className="btn btn-o btn-lg" onClick={()=>document.getElementById('how')?.scrollIntoView({behavior:'smooth'})}>어떻게 작동하나요?</button>
+<button className="btn btn-o btn-lg" onClick={()=>document.getElementById('who')?.scrollIntoView({behavior:'smooth'})}>누가 사용하나요?</button>
 </div>
 <div className="au" style={{animationDelay:'.5s',display:'flex',alignItems:'center',gap:12,fontSize:13,color:'var(--text3)'}}>
-<div style={{display:'flex'}}>{['👨‍💼','👩‍💻','👨‍🍳','👩‍💼','🧑‍🔬'].map((a,i)=><div key={i} style={{width:28,height:28,borderRadius:14,background:['var(--amber-l)','var(--teal-l)','var(--blue-l)','var(--violet-l)','var(--coral-l)'][i],display:'flex',alignItems:'center',justifyContent:'center',fontSize:14,marginLeft:i?-8:0,border:'2px solid var(--bg)',zIndex:5-i}}>{a}</div>)}</div>
+<div style={{display:'flex'}}>{['🛒','📊','☕','👥','🚀'].map((a,i)=><div key={i} style={{width:28,height:28,borderRadius:14,background:['var(--blue-l)','var(--violet-l)','var(--amber-l)','var(--teal-l)','var(--coral-l)'][i],display:'flex',alignItems:'center',justifyContent:'center',fontSize:14,marginLeft:i?-8:0,border:'2px solid var(--bg)',zIndex:5-i}}>{a}</div>)}</div>
 <span>지금 <strong style={{color:'var(--amber)'}}>{n.toLocaleString()}명</strong>이 서로를 찾는 중</span>
 </div>
 </div>
 </div>
 </header>
 
-{/* Problem */}
-<section style={{padding:'64px 0',background:'var(--navy)',color:'#fff'}}>
+{/* 누가 사용하나요? — 3열 압축 */}
+<section id="who" style={{padding:'64px 0',background:'var(--navy)',color:'#fff'}}>
 <div className="ctn">
-<div style={{textAlign:'center',marginBottom:40}}><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>양쪽 다 간절한데,<br/>서로를 못 찾고 있습니다</h2><p style={{color:'rgba(255,255,255,.5)',marginTop:8}}>동네 카페부터 삼성전자까지, 모두 같은 고민입니다</p></div>
-<div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:16}}>
-{[{a:'카페 사장님',b:'원두 로스터리',icon:'☕ ↔ 🫘',pain:'좋은 원두 어디서 구하지? vs 납품처를 찾고 싶은데',tag:'일상'},{a:'쇼핑몰 대표',b:'봉제공장',icon:'🛍️ ↔ 🏭',pain:'위탁생산 할 곳이 필요해 vs 주문할 곳이 없어',tag:'일상'},{a:'유튜버',b:'광고주 브랜드',icon:'📱 ↔ 💄',pain:'협찬 어떻게 받지? vs 인플루언서 어디서 찾지?',tag:'일상'},{a:'식당 사장님',b:'식자재 납품업체',icon:'🍽️ ↔ 🥬',pain:'더 싸고 좋은 식자재 vs 안정적 거래처 확보',tag:'일상'},{a:'인테리어 업자',b:'자재 도매상',icon:'🔨 ↔ 🧱',pain:'저렴한 자재 어디? vs 시공업체에 납품하고 싶어',tag:'일상'},{a:'구매담당자',b:'공급업체',icon:'🛒 ↔ 📦',pain:'신규 공급처 발굴이 급해 vs 대기업에 영업하고 싶어',tag:'기업'},{a:'투자심사역',b:'스타트업 CEO',icon:'📊 ↔ 🚀',pain:'유망 기업을 찾고 싶어 vs 투자자를 만나고 싶어',tag:'기업'},{a:'무역상',b:'제조사',icon:'🌏 ↔ 🏭',pain:'수출할 제품이 필요해 vs 해외 유통망이 필요해',tag:'기업'}].map((x,i)=>(
-<div key={i} style={{background:'rgba(255,255,255,.06)',borderRadius:'var(--r)',padding:22,border:'1px solid rgba(255,255,255,.08)',textAlign:'center'}}>
-<div style={{fontSize:22,marginBottom:6}}>{x.icon}</div>
-<div style={{marginBottom:6}}><span style={{fontWeight:700}}>{x.a}</span> <span style={{color:'var(--amber)',fontWeight:800}}>⚡</span> <span style={{fontWeight:700}}>{x.b}</span></div>
-<p style={{fontSize:13,color:'rgba(255,255,255,.6)',lineHeight:1.5}}>{x.pain}</p>
+<div style={{textAlign:'center',marginBottom:32}}><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>이런 분들이 사용합니다</h2></div>
+<div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))',gap:10}}>
+{[
+{icon:'🛒',who:'구매담당자',want:'공급업체 발굴'},{icon:'🏭',who:'공급업체 영업팀',want:'구매담당자 연결'},{icon:'📊',who:'VC / PE 심사역',want:'딜소싱 · 투자처'},{icon:'💰',who:'스타트업 CFO',want:'투자자 매칭'},
+{icon:'👥',who:'HR · 채용담당자',want:'핵심 인재 서치'},{icon:'💼',who:'이직 희망 인재',want:'회사 실무자 연결'},{icon:'☕',who:'카페 · 식당',want:'납품업체 찾기'},{icon:'🛍️',who:'쇼핑몰 대표',want:'위탁생산 공장'},
+{icon:'🌏',who:'무역상',want:'수출·수입 파트너'},{icon:'🏗️',who:'건설 · 시공업체',want:'하도급 · 자재'},{icon:'📱',who:'유튜버 · 인플루언서',want:'협찬 · 광고주'},{icon:'⚖️',who:'법무 · 회계법인',want:'기업 고객 확보'},
+].map((x,i)=>(
+<div key={i} style={{background:'rgba(255,255,255,.06)',borderRadius:12,padding:'16px 12px',border:'1px solid rgba(255,255,255,.06)',textAlign:'center'}}>
+<div style={{fontSize:24,marginBottom:4}}>{x.icon}</div>
+<div style={{fontWeight:700,fontSize:13,marginBottom:2}}>{x.who}</div>
+<div style={{fontSize:11,color:'rgba(255,255,255,.5)'}}>{x.want}</div>
 </div>))}
 </div>
-<div style={{textAlign:'center',marginTop:32}}><div style={{display:'inline-block',background:'rgba(232,163,23,.15)',borderRadius:'var(--r)',padding:'14px 28px',fontSize:15,color:'var(--amber)',fontWeight:600}}>⚡ BizMatch는 이 양쪽을 동의 기반으로 연결합니다</div></div>
+<div style={{textAlign:'center',marginTop:24}}><p style={{fontSize:14,color:'rgba(255,255,255,.5)'}}>여기 없는 업종도? <strong style={{color:'var(--amber)'}}>어떤 비즈니스든 매칭됩니다</strong></p></div>
 </div></section>
 
 {/* How */}
@@ -247,9 +295,9 @@ return(<div style={{background:'var(--bg)'}}>
 <span style={{color:'var(--navy)',fontWeight:700,fontSize:14}}>담당자 찾기</span>
 </div>
 <div style={{padding:16}}>
-<div style={{background:'var(--bg2)',borderRadius:10,padding:'12px 16px',marginBottom:14,fontSize:14,color:'var(--text3)'}}>🔍 "삼성전자 구매팀" 검색</div>
+<div style={{background:'var(--bg2)',borderRadius:10,padding:'12px 16px',marginBottom:14,fontSize:14,color:'var(--text3)'}}>🔍 "VC 심사역" 또는 "삼성전자 구매팀" 검색</div>
 {/* 결과 */}
-{[{name:'김영호',pos:'구매팀 과장',co:'삼성전자 반도체사업부',sig:'웨이퍼 세정제 공급업체 찾는 중',av:'👨‍💼'},{name:'이준혁',pos:'구매팀장',co:'삼성전자 DS부문',sig:'NCM 양극재 연간 납품사 선정 중',av:'👨‍💼'}].map((p,i)=>(
+{[{name:'오승민',pos:'VC 심사역',co:'한국투자파트너스 · 투자심사팀',sig:'2차전지 소재 시리즈A~B 딜소싱 중',av:'📊'},{name:'김영호',pos:'구매팀 과장',co:'삼성전자 반도체사업부',sig:'웨이퍼 세정제 공급업체 찾는 중',av:'👨‍💼'},{name:'윤하린',pos:'채용팀장',co:'네오위즈 HR',sig:'시니어 서버 개발자 채용 중 (연봉 1억+)',av:'👥'}].map((p,i)=>(
 <div key={i} style={{display:'flex',gap:12,alignItems:'center',padding:'12px 0',borderBottom:i===0?'1px solid var(--bg2)':'none'}}>
 <div style={{width:40,height:40,borderRadius:20,background:'var(--blue-l)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:20}}>{p.av}</div>
 <div style={{flex:1}}>
@@ -264,13 +312,13 @@ return(<div style={{background:'var(--bg)'}}>
 </div>
 {/* 사용 예시 */}
 <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
-{[{q:'"현대자동차 EV배터리팀"',icon:'🏭'},{q:'"아모레퍼시픽 해외영업"',icon:'💄'},{q:'"네이버 AI Lab"',icon:'💻'},{q:'"CJ제일제당 구매팀"',icon:'🍜'},{q:'"원두 로스터리 납품"',icon:'☕'},{q:'"인테리어 타일 도매"',icon:'🔨'}].map((e,i)=>(
+{[{q:'"VC 심사역 2차전지"',icon:'📊'},{q:'"삼성전자 구매팀"',icon:'🏢'},{q:'"스타트업 CFO 투자유치"',icon:'💰'},{q:'"HR 시니어 개발자"',icon:'👥'},{q:'"현대차 EV배터리팀"',icon:'🏭'},{q:'"PE M&A 담당"',icon:'🏦'},{q:'"원두 로스터리 납품"',icon:'☕'},{q:'"아모레퍼시픽 해외영업"',icon:'💄'}].map((e,i)=>(
 <div key={i} style={{background:'var(--bg2)',borderRadius:10,padding:'10px 14px',display:'flex',alignItems:'center',gap:8,fontSize:12,color:'var(--text2)'}}>
 <span>{e.icon}</span><span>{e.q}</span>
 </div>
 ))}
 </div>
-<p style={{textAlign:'center',marginTop:16,fontSize:13,color:'var(--text3)'}}>회사명, 부서명, 업종으로 검색하면<br/><strong style={{color:'var(--text)'}}>담당자 이름·직책·연락처</strong>를 바로 확인할 수 있습니다<br/><span style={{fontSize:11,color:'var(--teal)'}}>* 양쪽 동의 시에만 연락처 공개</span></p>
+<p style={{textAlign:'center',marginTop:16,fontSize:13,color:'var(--text3)'}}>VC 심사역, 대기업 구매팀장, HR 채용담당자, 카페 사장님까지<br/><strong style={{color:'var(--text)'}}>담당자 이름·직책·연락처</strong>를 바로 확인할 수 있습니다<br/><span style={{fontSize:11,color:'var(--teal)'}}>* 양쪽 동의 시에만 연락처 공개</span></p>
 </div>
 </div></section>
 
@@ -279,9 +327,9 @@ return(<div style={{background:'var(--bg)'}}>
 <div className="ctn">
 <div style={{textAlign:'center',marginBottom:40}}><h2 style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:800}}>실제 매칭 사례</h2><p style={{color:'var(--text2)',marginTop:8}}>동네 카페부터 삼성전자까지, 매칭은 규모를 가리지 않습니다</p></div>
 <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:16}}>
-{[{a:'강남 카페 사장님',b:'제주 로스터리',r:'스페셜티 원두 월 정기납품 계약',t:'☕ 구매↔공급',d:'매칭 후 2일 만에 샘플 수령',tag:'일상'},{a:'의류 쇼핑몰 대표',b:'동대문 봉제공장',r:'위탁생산 월 500벌 계약',t:'🛍️ 발주↔생산',d:'매칭 후 3일 만에 미팅',tag:'일상'},{a:'뷰티 유튜버 (12만)',b:'신생 화장품 브랜드',r:'월 2건 협찬 + 매출 연동',t:'📱 광고↔인플루언서',d:'매칭 후 1일 만에 DM',tag:'일상'},{a:'현대자동차 구매팀장',b:'NCM 양극재 스타트업',r:'연간 5,000톤 납품 MOU',t:'🏭 구매↔공급',d:'매칭 후 3일 만에 미팅',tag:'대기업'},{a:'AI 스타트업 CEO',b:'한국투자 VC 심사역',r:'시리즈A 50억 투자 유치',t:'💰 투자유치↔투자처',d:'매칭 후 1주 만에 TS',tag:'스타트업'},{a:'인테리어 시공팀',b:'타일 도매상',r:'현장 직납 월 거래 시작',t:'🔨 구매↔공급',d:'매칭 후 당일 견적',tag:'일상'},{a:'삼성전자 구매팀',b:'반도체 소재 업체',r:'웨이퍼 세정제 연간 계약',t:'🏢 구매↔공급',d:'매칭 후 3일 만에 미팅',tag:'대기업'},{a:'K-뷰티 무역상',b:'아모레퍼시픽 해외팀',r:'베트남 유통 파트너십',t:'🌏 수출↔무역',d:'매칭 후 5일 만에 미팅',tag:'수출'}].map((c,i)=>(
+{[{a:'한국투자 VC 심사역',b:'AI 스타트업 CFO',r:'시리즈A 50억 투자유치 완료',t:'📊 투자↔유치',d:'1주 만에 TS',tag:'투자'},{a:'삼성전자 구매팀',b:'에코켐 (반도체 소재)',r:'웨이퍼 세정제 연간 납품 계약',t:'🏢 구매↔공급',d:'3일 만에 미팅',tag:'구매'},{a:'네오위즈 채용팀장',b:'시니어 서버 개발자',r:'연봉 1.2억 스카웃 성공',t:'👥 채용↔이직',d:'5일 만에 면접',tag:'채용'},{a:'현대자동차 구매팀장',b:'NCM 양극재 스타트업',r:'연간 5,000톤 납품 MOU 체결',t:'🏭 구매↔공급',d:'3일 만에 미팅',tag:'구매'},{a:'IMM PE 심사역',b:'SaaS 기업 CFO',r:'1,000억 인수 LOI 체결',t:'🏦 M&A',d:'2주 만에 LOI',tag:'투자'},{a:'강남 카페 사장님',b:'제주 로스터리',r:'스페셜티 원두 월 정기납품',t:'☕ 구매↔공급',d:'2일 만에 샘플',tag:'일상'},{a:'쿠팡 상품기획팀',b:'중소 식품 제조사',r:'PB상품 공동개발 계약',t:'🛒 구매↔공급',d:'1주 만에 미팅',tag:'구매'},{a:'의류 쇼핑몰 대표',b:'동대문 봉제공장',r:'위탁생산 월 500벌 계약',t:'🛍️ 발주↔생산',d:'3일 만에 미팅',tag:'일상'},{a:'K-뷰티 무역상',b:'아모레퍼시픽 해외팀',r:'베트남 유통 파트너십 체결',t:'🌏 수출↔무역',d:'5일 만에 미팅',tag:'수출'},{a:'카카오 HR팀',b:'AI 리서처',r:'연봉 1.5억 핵심인재 영입',t:'🎯 채용↔이직',d:'3일 만에 커피챗',tag:'채용'}].map((c,i)=>(
 <div key={i} className="card" style={{padding:24}}>
-<div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}><span className="badge b-am" style={{fontSize:10}}>{c.t}</span><span style={{fontSize:10,padding:'3px 8px',borderRadius:10,background:c.tag==='대기업'?'var(--blue-l)':c.tag==='스타트업'?'var(--violet-l)':c.tag==='수출'?'var(--teal-l)':'var(--bg2)',color:c.tag==='대기업'?'var(--blue)':c.tag==='스타트업'?'var(--violet)':c.tag==='수출'?'var(--teal)':'var(--text3)',fontWeight:600}}>{c.tag}</span><span style={{fontSize:11,color:'var(--text3)',marginLeft:'auto'}}>{c.d}</span></div>
+<div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}><span className="badge b-am" style={{fontSize:10}}>{c.t}</span><span style={{fontSize:10,padding:'3px 8px',borderRadius:10,background:c.tag==='투자'?'var(--violet-l)':c.tag==='구매'?'var(--blue-l)':c.tag==='채용'?'var(--coral-l)':c.tag==='수출'?'var(--teal-l)':'var(--bg2)',color:c.tag==='투자'?'var(--violet)':c.tag==='구매'?'var(--blue)':c.tag==='채용'?'var(--coral)':c.tag==='수출'?'var(--teal)':'var(--text3)',fontWeight:600}}>{c.tag}</span><span style={{fontSize:11,color:'var(--text3)',marginLeft:'auto'}}>{c.d}</span></div>
 <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}>
 <div style={{flex:1,padding:'8px 12px',background:'var(--bg2)',borderRadius:8,fontSize:13,fontWeight:600,textAlign:'center'}}>{c.a}</div>
 <span style={{color:'var(--amber)',fontWeight:800,fontSize:16}}>⚡</span>

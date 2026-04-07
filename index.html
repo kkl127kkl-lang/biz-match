@@ -430,76 +430,116 @@ return(<div style={{paddingBottom:68,minHeight:'100vh',background:'var(--bg)'}}>
 
 // ═══ Home ═══
 function Home(){const{setPg,setSelSig,setModal,chatUn}=useApp();
+const[recSeed,setRecSeed]=useState(0);const[sq,setSq]=useState('');
 const openSig=(s)=>{setSelSig(s);setModal('detail')};
-return(<div style={{paddingTop:16}}>
-<div style={{background:'linear-gradient(135deg,var(--navy),#16213e)',borderRadius:'var(--r)',padding:24,marginBottom:16,color:'#fff'}}>
-<div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:12}}>
-<div><div style={{fontSize:13,color:'rgba(255,255,255,.6)'}}>오늘의 매칭</div><div style={{fontSize:32,fontWeight:800,marginTop:2}}>3<span style={{fontSize:16,fontWeight:400,marginLeft:4}}>건</span></div></div>
-<div style={{textAlign:'right'}}><div style={{fontSize:11,color:'rgba(255,255,255,.5)'}}>내 신호</div><div style={{fontSize:11,color:'var(--amber)',fontWeight:600}}>📡 2개 활성</div></div>
+// 추천 매칭: 셔플해서 보여줌
+const shuffled=[...SIGNALS].sort(()=>Math.random()-.5+recSeed*0);
+const recs=shuffled.slice(0,4);
+// 실시간 신호: 시간 붙여서 당근처럼
+const times=['방금','2분 전','5분 전','12분 전','23분 전','1시간 전','2시간 전','3시간 전'];
+const liveSigs=SIGNALS.map((s,i)=>({...s,time:times[i%times.length]}));
+// 검색 필터
+const filtered=sq?SIGNALS.filter(s=>(s.name+s.co+s.dept+s.kw+s.desc).toLowerCase().includes(sq.toLowerCase())):null;
+return(<div style={{paddingTop:12}}>
+
+{/* ① 검색창 — 항상 상단 고정 */}
+<div style={{marginBottom:14}}>
+<div style={{position:'relative'}}>
+<input className="inp" value={sq} onChange={e=>setSq(e.target.value)} placeholder="🔍 회사, 부서, 업종, 담당자 검색" style={{paddingLeft:16,paddingRight:40,boxShadow:'var(--sh)',fontSize:15}}/>
+{sq&&<button onClick={()=>setSq('')} style={{position:'absolute',right:14,top:'50%',transform:'translateY(-50%)',fontSize:16,color:'var(--text3)',background:'none',border:'none'}}>✕</button>}
 </div>
-<button className="btn btn-a btn-sm btn-w" onClick={()=>setPg('matches')}>새로운 매칭 확인하기 →</button>
-<div style={{display:'flex',gap:8,marginTop:8}}>
-<button className="btn btn-sm" style={{flex:1,background:'rgba(255,255,255,.15)',color:'#fff'}} onClick={()=>setPg('search')}>🔍 담당자 찾기</button>
-<button className="btn btn-sm" style={{flex:1,background:'rgba(255,255,255,.15)',color:'#fff'}} onClick={()=>setPg('chat')}>💬 채팅 {chatUn>0&&<span style={{background:'var(--coral)',borderRadius:8,padding:'1px 6px',fontSize:10,marginLeft:4}}>{chatUn}</span>}</button>
-</div>
+{!sq&&<div style={{display:'flex',gap:6,marginTop:8,overflowX:'auto'}}>
+{['구매팀','VC 심사역','원두 납품','위탁생산','채용담당','투자유치'].map(t=>(
+<button key={t} onClick={()=>setSq(t)} style={{padding:'5px 12px',borderRadius:20,background:'var(--bg2)',border:'none',fontSize:11,color:'var(--text2)',fontWeight:600,whiteSpace:'nowrap',cursor:'pointer'}}>{t}</button>))}
+</div>}
 </div>
 
-{/* 프로필 완성 유도 배너 */}
-<div className="card" style={{padding:16,marginBottom:14,border:'1.5px solid var(--amber)',background:'var(--amber-x)'}}>
-<div style={{display:'flex',alignItems:'center',gap:12}}>
-<div style={{width:40,height:40,borderRadius:20,background:'var(--amber-l)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:18,flexShrink:0}}>📋</div>
+{/* 검색 결과 */}
+{filtered&&<div style={{marginBottom:20}}>
+<h3 style={{fontSize:14,fontWeight:700,marginBottom:10}}>🔍 "{sq}" 검색 결과</h3>
+{filtered.length===0?<div style={{textAlign:'center',padding:30,color:'var(--text3)'}}><p>검색 결과가 없습니다</p></div>:
+filtered.map((sig,i)=>{const cat=gc(sig.cat);return(
+<div key={sig.id} className="match-card au" style={{padding:14,marginBottom:8,cursor:'pointer'}} onClick={()=>openSig(sig)}>
+<div style={{display:'flex',alignItems:'center',gap:10}}>
+<div style={{width:38,height:38,borderRadius:19,background:cat.bg,display:'flex',alignItems:'center',justifyContent:'center',fontSize:16}}>{sig.av}</div>
 <div style={{flex:1}}>
-<div style={{fontWeight:700,fontSize:13,color:'var(--amber-d)'}}>프로필을 완성하면 매칭률 3배↑</div>
-<div style={{fontSize:11,color:'var(--text2)',marginTop:2}}>"찾고 있는 것"을 등록하면 AI가 자동 매칭!</div>
-<div style={{height:4,background:'var(--bg3)',borderRadius:2,marginTop:6}}><div style={{height:4,background:'linear-gradient(90deg,var(--amber),var(--teal))',borderRadius:2,width:'30%'}}/></div>
-<div style={{fontSize:10,color:'var(--text3)',marginTop:2}}>완성도 30% — 니즈카드 · 인증 · 전화번호 추가</div>
+<div style={{fontWeight:700,fontSize:13}}>{sig.name} <span style={{fontSize:11,color:'var(--text3)',fontWeight:400}}>{sig.co}{sig.dept?' · '+sig.dept:''}</span></div>
+<div style={{fontSize:12,color:cat.color,fontWeight:600}}>{cat.icon} {sig.kw}</div>
 </div>
-<button className="btn btn-a btn-sm" style={{flexShrink:0,fontSize:11}} onClick={()=>setPg('signals')}>완성</button>
+<span className="badge b-am" style={{fontSize:10}}>{sig.score}%</span>
+</div></div>)})}
+</div>}
+
+{/* 검색 안 할 때만 아래 표시 */}
+{!sq&&<>
+
+{/* 프로필 완성 배너 */}
+<div className="card" style={{padding:14,marginBottom:14,border:'1.5px solid var(--amber)',background:'var(--amber-x)'}}>
+<div style={{display:'flex',alignItems:'center',gap:10}}>
+<div style={{fontSize:18}}>📋</div>
+<div style={{flex:1}}>
+<div style={{fontWeight:700,fontSize:12,color:'var(--amber-d)'}}>프로필 완성하면 매칭률 3배↑</div>
+<div style={{height:4,background:'var(--bg3)',borderRadius:2,marginTop:4}}><div style={{height:4,background:'linear-gradient(90deg,var(--amber),var(--teal))',borderRadius:2,width:'30%'}}/></div>
+</div>
+<button className="btn btn-a btn-sm" style={{fontSize:10,padding:'4px 10px',minHeight:30}} onClick={()=>setPg('signals')}>완성</button>
 </div>
 </div>
 
+{/* ② AI 추천 매칭 — 셔플 가능 */}
 <div style={{marginBottom:20}}>
-<div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:12}}>
-<h2 style={{fontSize:16,fontWeight:800}}>📡 당신을 찾고 있는 사람들</h2>
-<button className="btn btn-g btn-sm" onClick={()=>setPg('matches')} style={{fontSize:11}}>전체보기</button>
+<div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:10}}>
+<h2 style={{fontSize:16,fontWeight:800}}>⚡ AI 추천 매칭</h2>
+<button className="btn btn-g btn-sm" onClick={()=>setRecSeed(p=>p+1)} style={{fontSize:11}}>🔄 새로고침</button>
 </div>
-{SIGNALS.slice(0,6).map((sig,i)=>{const cat=gc(sig.cat);return(
-<div key={sig.id} className={`match-card au ${i<2?'hot':''}`} style={{padding:16,marginBottom:10,animationDelay:`${i*80}ms`,cursor:'pointer'}} onClick={()=>openSig(sig)}>
+{recs.map((sig,i)=>{const cat=gc(sig.cat);return(
+<div key={sig.id+recSeed} className={`match-card au ${i===0?'hot':''}`} style={{padding:16,marginBottom:10,animationDelay:`${i*80}ms`,cursor:'pointer'}} onClick={()=>openSig(sig)}>
 <div style={{display:'flex',alignItems:'center',gap:12}}>
-<div className="score" style={{background:`linear-gradient(135deg,var(--amber),var(--coral))`}}>{sig.score}%</div>
+<div className="score" style={{background:'linear-gradient(135deg,var(--amber),var(--coral))'}}>{sig.score}%</div>
 <div style={{flex:1}}>
 <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:2}}>
-<span style={{fontWeight:700,fontSize:14}}>{sig.co}</span>
-<span style={{fontSize:11,color:'var(--text3)'}}>{sig.dept} · {sig.pos}</span>
+<span style={{fontWeight:700,fontSize:14}}>{sig.co||sig.name}</span>
+<span style={{fontSize:11,color:'var(--text3)'}}>{sig.dept?sig.dept+' · ':''}{sig.pos}</span>
 {sig.v&&<span style={{fontSize:10}}>✅</span>}
 </div>
 <div style={{fontSize:13,fontWeight:600,color:cat.color}}>{cat.icon} {sig.kw}</div>
 <div style={{fontSize:12,color:'var(--text2)',marginTop:2,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{sig.desc}</div>
 </div>
-<span style={{fontSize:10,color:'var(--coral)',fontWeight:600,flexShrink:0}}>{sig.exp}</span>
 </div>
 </div>)})}
 </div>
 
+{/* ③ 실시간 새 신호 — 당근처럼 시간 표시 */}
 <div style={{marginBottom:20}}>
-<h2 style={{fontSize:16,fontWeight:800,marginBottom:12}}>🔥 지금 활발한 신호</h2>
-<div style={{display:'flex',gap:8,overflowX:'auto',paddingBottom:8}}>
-{SIGNALS.slice(6).map(sig=>{const cat=gc(sig.cat);return(
-<div key={sig.id} style={{minWidth:200,padding:14,background:'var(--card)',borderRadius:'var(--r)',boxShadow:'var(--sh)',cursor:'pointer',border:'1px solid var(--bg3)',flexShrink:0}} onClick={()=>openSig(sig)}>
-<span className="badge" style={{background:cat.bg,color:cat.color,fontSize:10,marginBottom:6}}>{cat.icon} {cat.label}</span>
-<div style={{fontWeight:700,fontSize:13,marginBottom:2}}>{sig.co}</div>
-<div style={{fontSize:12,color:'var(--text2)',marginBottom:4}}>{sig.kw}</div>
-<div style={{fontSize:10,color:'var(--text3)'}}>{sig.name} · {sig.exp}</div>
+<div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:10}}>
+<h2 style={{fontSize:16,fontWeight:800}}>📡 실시간 새 신호</h2>
+<button className="btn btn-g btn-sm" onClick={()=>setPg('search')} style={{fontSize:11}}>전체보기 →</button>
+</div>
+{liveSigs.slice(0,8).map((sig,i)=>{const cat=gc(sig.cat);return(
+<div key={sig.id} className="au" style={{display:'flex',alignItems:'center',gap:10,padding:'12px 0',borderBottom:i<7?'1px solid var(--bg2)':'none',cursor:'pointer',animationDelay:`${i*50}ms`}} onClick={()=>openSig(sig)}>
+<div style={{width:36,height:36,borderRadius:18,background:cat.bg,display:'flex',alignItems:'center',justifyContent:'center',fontSize:16,flexShrink:0}}>{sig.av}</div>
+<div style={{flex:1,minWidth:0}}>
+<div style={{fontSize:13,fontWeight:600,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}><span style={{color:cat.color}}>{cat.icon}</span> {sig.co||sig.name} — {sig.kw}</div>
+<div style={{fontSize:11,color:'var(--text3)'}}>{sig.name} · {sig.pos}</div>
+</div>
+<div style={{fontSize:10,color:'var(--text3)',flexShrink:0,textAlign:'right'}}>
+{i<2&&<div style={{width:6,height:6,borderRadius:3,background:'var(--coral)',display:'inline-block',marginRight:4}}/>}
+{sig.time}
+</div>
 </div>)})}
-</div></div>
+</div>
 
-<div><h2 style={{fontSize:16,fontWeight:800,marginBottom:12}}>🏷️ 카테고리별 탐색</h2>
-<div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:8}}>
-{CATS.slice(0,6).map(c=>(
-<button key={c.key} className="card" style={{padding:14,textAlign:'center',cursor:'pointer',border:'none'}} onClick={()=>setPg('matches')}>
-<div style={{fontSize:24,marginBottom:4}}>{c.icon}</div><div style={{fontSize:11,fontWeight:600,color:'var(--text2)'}}>{c.label}</div>
+{/* 카테고리 바로가기 */}
+<div style={{marginBottom:16}}>
+<h2 style={{fontSize:14,fontWeight:700,marginBottom:10}}>🏷️ 카테고리</h2>
+<div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:8}}>
+{CATS.slice(0,8).map(c=>(
+<button key={c.key} className="card" style={{padding:10,textAlign:'center',cursor:'pointer',border:'none'}} onClick={()=>{setSq(c.label)}}>
+<div style={{fontSize:20,marginBottom:2}}>{c.icon}</div><div style={{fontSize:10,fontWeight:600,color:'var(--text2)'}}>{c.label}</div>
 </button>))}
-</div></div>
+</div>
+</div>
+
+</>}
 </div>);
 }
 
